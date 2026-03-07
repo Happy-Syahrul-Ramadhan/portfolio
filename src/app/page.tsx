@@ -67,14 +67,13 @@ export default async function Home() {
       {bio && (
         <section className="flex flex-col gap-4">
           <h2 className="text-2xl font-bold font-heading flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <User className="h-5 w-5 text-primary" />
+            <div className="w-10 h-10 rounded-xl bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center">
+              <User className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             </div>
             About Me
           </h2>
-          <div className="relative bg-card p-8 rounded-2xl border border-border/50 overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0"></div>
-            <p className="text-muted-foreground leading-relaxed whitespace-pre-line relative z-10 text-justify">{bio}</p>
+          <div className="bg-card p-8 rounded-2xl border border-border/50">
+            <p className="text-muted-foreground leading-relaxed whitespace-pre-line text-justify">{bio}</p>
           </div>
         </section>
       )}

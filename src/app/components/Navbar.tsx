@@ -16,6 +16,11 @@ export function Navbar() {
     setMounted(true)
   }, [])
 
+  // Hide navbar on admin pages
+  if (pathname?.startsWith('/admin')) {
+    return null
+  }
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Experience", href: "/experience" },

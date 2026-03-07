@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award } from "lucide-react"
 import { ToastProvider } from "../components/ToastProvider"
+import AdminMobileMenu from "../components/AdminMobileMenu"
 
 export default function AdminLayout({
   children,
@@ -9,8 +10,8 @@ export default function AdminLayout({
 }) {
   return (
     <ToastProvider>
-      <div className="flex min-h-screen -mt-8 -mx-4 pb-20 sm:-mt-8">
-      {/* Sidebar */}
+      <div className="flex min-h-screen pb-20">
+      {/* Sidebar - Desktop */}
       <aside className="w-64 border-r bg-card hidden md:block">
         <div className="flex h-16 items-center px-6 border-b">
           <Link href="/admin" className="font-heading font-bold tracking-tight">
@@ -79,10 +80,12 @@ export default function AdminLayout({
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 bg-muted/30">
-        <div className="flex h-16 items-center px-6 border-b bg-background md:hidden">
+        {/* Mobile Header with Menu */}
+        <div className="flex h-16 items-center justify-between px-6 border-b bg-background md:hidden">
           <Link href="/admin" className="font-heading font-bold tracking-tight">
             Admin Panel
           </Link>
+          <AdminMobileMenu />
         </div>
         <div className="flex-1 p-6 md:p-8 max-w-6xl mx-auto w-full">
           {children}

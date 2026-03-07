@@ -88,14 +88,14 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
             <div
               className={`
                 flex flex-col gap-4 bg-card p-8 rounded-2xl border border-border/50 shadow-sm
-                hover:shadow-xl hover:border-primary/20 transition-all duration-500
+                hover:shadow-xl hover:border-primary/20 transition-all duration-500 overflow-hidden min-w-0
                 ${isEven ? "md:order-1" : "md:order-2"}
               `}
             >
               {/* Header */}
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-bold text-2xl leading-tight">{exp.role}</h3>
+              <div className="flex flex-col gap-3 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 min-w-0">
+                  <h3 className="font-bold text-2xl leading-tight break-words">{exp.role}</h3>
                   {exp.current && (
                     <span className="px-2.5 py-1 text-xs font-semibold bg-green-500/15 text-green-600 dark:text-green-400 rounded-full border border-green-500/20">
                       Current Position
@@ -103,23 +103,23 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-lg text-foreground/90">{exp.company}</span>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="font-semibold text-lg text-foreground/90 break-words">{exp.company}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground min-w-0">
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span className="font-medium">{exp.period}</span>
+                    <span className="font-medium break-words">{exp.period}</span>
                   </div>
                 </div>
               </div>
 
               {/* Description */}
               {exp.description && (
-                <div className="pt-2 border-t border-border/50">
-                  <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap break-words text-justify">
+                <div className="pt-2 border-t border-border/50 min-w-0">
+                  <p className="text-muted-foreground leading-relaxed break-words overflow-wrap-anywhere text-justify">
                     {exp.description}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
                   {exp.skills.split(',').map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
+                      className="px-2.5 py-1 text-xs font-medium bg-blue-500/20 dark:bg-blue-500/30 text-blue-700 dark:text-blue-300 rounded-full border border-blue-500/30"
                     >
                       {skill.trim()}
                     </span>

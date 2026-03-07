@@ -3,6 +3,8 @@ import { Inter, Outfit } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "./components/ThemeProvider"
 import { Navbar } from "./components/Navbar"
+import { Footer } from "./components/Footer"
+import { MainWrapper } from "./components/MainWrapper"
 import CursorFollower from "./components/CursorFollower"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -29,16 +31,10 @@ export default function RootLayout({
         >
           <CursorFollower />
           <Navbar />
-          <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
+          <MainWrapper>
             {children}
-          </main>
-            <footer className="border-t py-6 md:py-0">
-              <div className="container max-w-5xl mx-auto flex flex-col items-center justify-center gap-4 md:h-16 md:flex-row px-4">
-                <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-                  © {new Date().getFullYear()} Syahrul. All rights reserved.
-                </p>
-              </div>
-            </footer>
+          </MainWrapper>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

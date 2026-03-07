@@ -63,8 +63,8 @@ export default function WorkExperienceSection({ experiences }: WorkExperienceSec
     <section className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold font-heading flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-            <Briefcase className="h-5 w-5 text-primary" />
+          <div className="w-10 h-10 rounded-xl bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center">
+            <Briefcase className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           </div>
           Work Experience
         </h2>
@@ -94,12 +94,12 @@ export default function WorkExperienceSection({ experiences }: WorkExperienceSec
               <div
                 className={`
                   flex flex-col gap-3 bg-card p-6 rounded-2xl border border-border/50 shadow-sm
-                  hover:shadow-md hover:border-border transition-all duration-300
+                  hover:shadow-md hover:border-border transition-all duration-300 overflow-hidden min-w-0
                   ${isEven ? "md:order-1" : "md:order-2"}
                 `}
               >
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-semibold text-xl leading-tight">{exp.role}</h3>
+                <div className="flex flex-wrap items-center gap-2 min-w-0">
+                  <h3 className="font-semibold text-xl leading-tight break-words">{exp.role}</h3>
                   {exp.current && (
                     <span className="px-2 py-0.5 text-xs font-medium bg-green-500/15 text-green-600 dark:text-green-400 rounded-full">
                       Current
@@ -107,14 +107,14 @@ export default function WorkExperienceSection({ experiences }: WorkExperienceSec
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-medium text-foreground/90">{exp.company}</span>
+                <div className="flex flex-wrap items-center gap-2 text-sm min-w-0">
+                  <span className="font-medium text-foreground/90 break-words">{exp.company}</span>
                   <span className="text-muted-foreground">·</span>
-                  <span className="text-muted-foreground">{exp.period}</span>
+                  <span className="text-muted-foreground break-words">{exp.period}</span>
                 </div>
 
                 {exp.description && (
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1 break-words whitespace-pre-wrap text-justify">
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1 break-words overflow-wrap-anywhere text-justify">
                     {exp.description}
                   </p>
                 )}
@@ -124,7 +124,7 @@ export default function WorkExperienceSection({ experiences }: WorkExperienceSec
                     {exp.skills.split(',').map((skill, idx) => (
                       <span
                         key={idx}
-                        className="px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
+                        className="px-2 py-0.5 text-xs font-medium bg-blue-500/20 dark:bg-blue-500/30 text-blue-700 dark:text-blue-300 rounded-full border border-blue-500/30"
                       >
                         {skill.trim()}
                       </span>

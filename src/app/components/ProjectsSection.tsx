@@ -63,8 +63,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     <section className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold font-heading flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-            <Layers className="h-5 w-5 text-primary" />
+          <div className="w-10 h-10 rounded-xl bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center">
+            <Layers className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           </div>
           Recent projects
         </h2>
