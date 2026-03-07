@@ -2,8 +2,7 @@
 
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
-import { writeFile } from "fs/promises"
-import { join } from "path"
+import { uploadToSupabase } from "@/lib/supabase-storage"
 
 export async function upsertProfile(formData: FormData) {
   const data = {
@@ -52,29 +51,20 @@ export async function updateCV(formData: FormData) {
       throw new Error("File too large (max 10MB)")
     }
 
-    // Convert file to buffer
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
+    // Upload to Supabase Storage (works on Vercel/serverless)
+    const { url } = await uploadToSupabase(file, "cv")
 
-    // Use fixed filename to replace old CV
-    const filename = "Happy Syahrul Ramadhan-resume.pdf"
-    const filepath = join(process.cwd(), "public", filename)
-
-    // Write file to public folder (will replace if exists)
-    await writeFile(filepath, buffer)
-
-    // Update database with CV path
-    const cvUrl = `/${filename}`
+    // Update database with CV URL from Supabase
     await prisma.profile.upsert({
       where: { id: "singleton" },
-      create: { id: "singleton", cvUrl },
-      update: { cvUrl },
+      create: { id: "singleton", cvUrl: url },
+      update: { cvUrl: url },
     })
 
     revalidatePath("/")
     revalidatePath("/admin/cv")
 
-    return { success: true, cvUrl }
+    return { success: true, cvUrl: url }
   } catch (error) {
     console.error("CV upload error:", error)
     throw error

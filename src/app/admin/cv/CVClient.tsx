@@ -77,13 +77,14 @@ export default function CVClient({ cvUrl }: { cvUrl: string | null }) {
                 <FileText className="h-5 w-5 text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <p className="font-medium">Happy Syahrul Ramadhan-resume.pdf</p>
+                <p className="font-medium">Resume CV</p>
                 <p className="text-sm text-muted-foreground">PDF Document</p>
               </div>
             </div>
             <a
               href={currentCvUrl}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-9 px-4 gap-2"
             >
               <Download className="h-4 w-4" />
@@ -112,7 +113,7 @@ export default function CVClient({ cvUrl }: { cvUrl: string | null }) {
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
             <p className="text-xs text-muted-foreground">
-              The uploaded CV will replace the existing one with filename: <strong>Happy Syahrul Ramadhan-resume.pdf</strong>
+              The uploaded CV will replace the existing one. File will be stored securely on Supabase Storage.
             </p>
           </div>
 

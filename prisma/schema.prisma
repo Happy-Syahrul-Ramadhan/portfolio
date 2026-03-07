@@ -54,11 +54,11 @@ model Profile {
   location  String  @default("")
   email     String  @default("")
   avatarUrl String? @map("avatar_url")
-  cvUrl     String? @map("cv_url")
   github    String  @default("")
   linkedin  String  @default("")
   twitter   String  @default("")
   website   String  @default("")
+  cvUrl     String? @map("cv_url")
 
   @@map("profile")
 }
@@ -79,18 +79,18 @@ model WorkExperience {
 }
 
 model Certificate {
-  id            String   @id @default(uuid()) @db.Uuid
-  createdAt     DateTime @default(now()) @map("created_at")
+  id            String    @id @default(uuid()) @db.Uuid
+  createdAt     DateTime  @default(now()) @map("created_at")
   title         String
   description   String
-  imageUrl      String   @map("image_url")
+  imageUrl      String    @map("image_url")
   issuer        String?
   issueDate     DateTime? @map("issue_date")
-  credentialUrl String? @map("credential_url")
-  credentialId  String? @map("credential_id")
+  credentialUrl String?   @map("credential_url")
+  published     Boolean   @default(false)
+  order         Int       @default(0)
+  credentialId  String?   @map("credential_id")
   skills        String?
-  published     Boolean  @default(false)
-  order         Int      @default(0)
 
   @@map("certificates")
 }
