@@ -21,6 +21,7 @@ export default async function Home() {
   const location = profile?.location
   const email = profile?.email
   const avatarUrl = profile?.avatarUrl
+  const cvUrl = profile?.cvUrl || "/Happy Syahrul Ramadhan-resume.pdf"
   const { github, linkedin, twitter, website } = profile || {}
 
   return (
@@ -52,10 +53,12 @@ export default async function Home() {
             {twitter && <Link href={twitter} target="_blank" className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-border hover:bg-accent transition-colors"><Twitter className="h-4 w-4" /></Link>}
             {website && <Link href={website} target="_blank" className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-border hover:bg-accent transition-colors"><Globe className="h-4 w-4" /></Link>}
           </div>
-          <div className="flex items-center gap-3 mt-2">
-            <Link href="/project" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-6">View Projects</Link>
-            <Link href="/blog" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-10 px-6">Read Blog</Link>
-            <a href="/Happy Syahrul Ramadhan-resume.pdf" download className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-10 px-6">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-2">
+            <div className="flex items-center gap-3">
+              <Link href="/project" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-6">View Projects</Link>
+              <Link href="/blog" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-10 px-6">Read Blog</Link>
+            </div>
+            <a href={cvUrl} download className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-10 px-6 sm:w-auto">
               <Download className="h-4 w-4" />
               Download CV
             </a>

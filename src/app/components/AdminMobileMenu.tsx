@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award, Menu, X } from "lucide-react"
+import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award, Menu, X, FileDown } from "lucide-react"
 
 export default function AdminMobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
@@ -86,6 +86,14 @@ export default function AdminMobileMenu() {
                 >
                   <Settings className="h-4 w-4" />
                   General
+                </Link>
+                <Link
+                  href="/admin/cv"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent text-foreground transition-colors"
+                >
+                  <FileDown className="h-4 w-4" />
+                  CV Management
                 </Link>
                 <form action="/api/auth/logout" method="POST" className="mt-2">
                   <button

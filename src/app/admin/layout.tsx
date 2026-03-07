@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award } from "lucide-react"
+import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award, FileDown } from "lucide-react"
 import { ToastProvider } from "../components/ToastProvider"
 import AdminMobileMenu from "../components/AdminMobileMenu"
 
@@ -64,6 +64,13 @@ export default function AdminLayout({
             >
               <Settings className="h-4 w-4" />
               General
+            </Link>
+            <Link
+              href="/admin/cv"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent text-foreground transition-colors"
+            >
+              <FileDown className="h-4 w-4" />
+              CV Management
             </Link>
             <form action="/api/auth/logout" method="POST" className="mt-2">
               <button

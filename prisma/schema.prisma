@@ -54,6 +54,7 @@ model Profile {
   location  String  @default("")
   email     String  @default("")
   avatarUrl String? @map("avatar_url")
+  cvUrl     String? @map("cv_url")
   github    String  @default("")
   linkedin  String  @default("")
   twitter   String  @default("")
