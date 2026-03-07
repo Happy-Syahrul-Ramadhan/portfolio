@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Project {
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  title       String
+  description String
+  content     String?
+  imageUrl    String?  @map("image_url")
+  link        String?
+  published   Boolean  @default(false)
+
+  @@map("projects")
+}
+
+model Blog {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  title     String
+  excerpt   String
+  content   String
+  slug      String   @unique
+  imageUrl  String?  @map("image_url")
+  published Boolean  @default(false)
+
+  @@map("blogs")
+}
+
+model Admin {
+  id        String   @id @default(uuid()) @db.Uuid
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("admins")
+}
+
+model Profile {
+  id        String  @id @default("singleton")
+  name      String  @default("")
+  title     String  @default("")
+  bio       String  @default("")
+  location  String  @default("")
+  email     String  @default("")
+  avatarUrl String? @map("avatar_url")
+  github    String  @default("")
+  linkedin  String  @default("")
+  twitter   String  @default("")
+  website   String  @default("")
+
+  @@map("profile")
+}
+
+model WorkExperience {
+  id          String   @id @default(uuid()) @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  company     String
+  role        String
+  period      String
+  description String
+  logoUrl     String?  @map("logo_url")
+  current     Boolean  @default(false)
+  order       Int      @default(0)
+
+  @@map("work_experiences")
+}
