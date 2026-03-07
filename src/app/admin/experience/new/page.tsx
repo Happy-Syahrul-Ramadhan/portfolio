@@ -1,11 +1,33 @@
 "use client"
 
 import { createExperience } from "@/app/actions/experience"
+import { useTransition } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import ImageUploader from "@/app/components/ImageUploader"
+import { useToast } from "@/app/components/ToastProvider"
 
 export default function NewExperience() {
+  const [isPending, startTransition] = useTransition()
+  const { showToast } = useToast()
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+
+    startTransition(async () => {
+      try {
+        await createExperience(formData)
+        showToast("Experience created successfully!", "success")
+        setTimeout(() => router.push("/admin/experience"), 1000)
+      } catch (error) {
+        showToast("Failed to create experience", "error")
+      }
+    })
+  }
+
   return (
     <div className="flex flex-col gap-6 max-w-2xl">
       <div className="flex items-center gap-4">
@@ -16,7 +38,7 @@ export default function NewExperience() {
         <h1 className="text-3xl font-bold tracking-tight font-heading">Add Experience</h1>
       </div>
 
-      <form action={createExperience} className="flex flex-col gap-4 bg-card border rounded-xl p-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-card border rounded-xl p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium" htmlFor="company">Company</label>
@@ -69,9 +91,9 @@ export default function NewExperience() {
           <label htmlFor="current" className="text-sm font-medium">This is my current position</label>
         </div>
 
-        <button type="submit"
-          className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-4 py-2 mt-2">
-          Add Experience
+        <button type="submit" disabled={isPending}
+          className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-4 py-2 mt-2 disabled:opacity-50">
+          {isPending ? "Adding..." : "Add Experience"}
         </button>
       </form>
     </div>

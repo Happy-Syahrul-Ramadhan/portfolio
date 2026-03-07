@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import dynamic from "next/dynamic"
 import ImageUploader from "@/app/components/ImageUploader"
+import { useToast } from "@/app/components/ToastProvider"
 
 const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), { ssr: false })
 
@@ -25,6 +26,7 @@ export default function EditProjectClient({ project }: { project: Project }) {
   const [content, setContent] = useState(project.content || "")
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState("")
+  const { showToast } = useToast()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,9 +35,14 @@ export default function EditProjectClient({ project }: { project: Project }) {
     formData.set("content", content)
 
     startTransition(async () => {
-      const { updateProject } = await import("@/app/actions/project")
-      await updateProject(project.id, formData)
-      router.push("/admin/projects")
+      try {
+        const { updateProject } = await import("@/app/actions/project")
+        await updateProject(project.id, formData)
+        showToast("Project updated successfully!", "success")
+        setTimeout(() => router.push("/admin/projects"), 1000)
+      } catch (err) {
+        showToast("Failed to update project", "error")
+      }
     })
   }
 

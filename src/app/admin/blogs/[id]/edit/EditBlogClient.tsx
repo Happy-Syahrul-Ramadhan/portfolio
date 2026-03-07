@@ -1,10 +1,12 @@
 "use client"
 
 import { useState, useTransition } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import dynamic from "next/dynamic"
 import ImageUploader from "@/app/components/ImageUploader"
+import { useToast } from "@/app/components/ToastProvider"
 
 const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), { ssr: false })
 
@@ -25,6 +27,8 @@ export default function EditBlogClient({ blog }: EditBlogClientProps) {
   const [content, setContent] = useState(blog.content)
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState("")
+  const { showToast } = useToast()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -37,8 +41,19 @@ export default function EditBlogClient({ blog }: EditBlogClientProps) {
     }
 
     startTransition(async () => {
-      const { updateBlog } = await import("@/app/actions/blog")
-      await updateBlog(blog.id, formData)
+      try {
+        const { updateBlog } = await import("@/app/actions/blog")
+        const result = await updateBlog(blog.id, formData)
+        
+        if (result?.error) {
+          showToast(result.error, "error")
+        } else {
+          showToast("Blog post updated successfully!", "success")
+          setTimeout(() => router.push("/admin/blogs"), 1000)
+        }
+      } catch (err) {
+        showToast("Failed to update blog post", "error")
+      }
     })
   }
 

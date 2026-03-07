@@ -1,9 +1,11 @@
 "use client"
 
 import { useTransition } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import ImageUploader from "@/app/components/ImageUploader"
+import { useToast } from "@/app/components/ToastProvider"
 
 interface EditExperienceClientProps {
   experience: {
@@ -21,14 +23,22 @@ interface EditExperienceClientProps {
 
 export default function EditExperienceClient({ experience }: EditExperienceClientProps) {
   const [isPending, startTransition] = useTransition()
+  const { showToast } = useToast()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
 
     startTransition(async () => {
-      const { updateExperience } = await import("@/app/actions/experience")
-      await updateExperience(experience.id, formData)
+      try {
+        const { updateExperience } = await import("@/app/actions/experience")
+        await updateExperience(experience.id, formData)
+        showToast("Experience updated successfully!", "success")
+        setTimeout(() => router.push("/admin/experience"), 1000)
+      } catch (error) {
+        showToast("Failed to update experience", "error")
+      }
     })
   }
 

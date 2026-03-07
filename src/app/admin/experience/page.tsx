@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { Plus, Pencil, Trash2 } from "lucide-react"
-import { deleteExperience } from "@/app/actions/experience"
+import { Plus, Pencil } from "lucide-react"
+import ExperienceActions from "./ExperienceActions"
 
 export const dynamic = "force-dynamic"
 
@@ -41,14 +41,11 @@ export default async function ManageExperience() {
                     className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">
                     <Pencil className="h-4 w-4" />
                   </Link>
-                  <form action={async () => {
-                    "use server"
-                    await deleteExperience(exp.id)
-                  }}>
-                    <button type="submit" className="inline-flex items-center justify-center rounded-md transition-colors hover:bg-destructive/10 text-destructive h-9 w-9">
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </form>
+                  <ExperienceActions
+                    experienceId={exp.id}
+                    role={exp.role}
+                    company={exp.company}
+                  />
                 </div>
               </div>
             ))}

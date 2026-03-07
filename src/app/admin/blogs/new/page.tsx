@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import dynamic from "next/dynamic"
 import ImageUploader from "@/app/components/ImageUploader"
+import { useToast } from "@/app/components/ToastProvider"
 
 const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), { ssr: false })
 
@@ -14,6 +15,7 @@ export default function NewBlog() {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState("")
   const router = useRouter()
+  const { showToast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -26,8 +28,18 @@ export default function NewBlog() {
     }
 
     startTransition(async () => {
-      const { createBlog } = await import("@/app/actions/blog")
-      await createBlog(formData)
+      try {
+        const { createBlog } = await import("@/app/actions/blog")
+        const result = await createBlog(formData)
+        if (result?.error) {
+          showToast(result.error, "error")
+        } else {
+          showToast("Blog post created successfully!", "success")
+          setTimeout(() => router.push("/admin/blogs"), 1000)
+        }
+      } catch (err) {
+        showToast("Failed to create blog post", "error")
+      }
     })
   }
 

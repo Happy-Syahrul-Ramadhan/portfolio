@@ -23,7 +23,7 @@ export async function createExperience(formData: FormData) {
   revalidatePath("/")
   revalidatePath("/experience")
   revalidatePath("/admin/experience")
-  redirect("/admin/experience")
+  return { success: true }
 }
 
 export async function updateExperience(id: string, formData: FormData) {
@@ -44,7 +44,7 @@ export async function updateExperience(id: string, formData: FormData) {
   revalidatePath("/")
   revalidatePath("/experience")
   revalidatePath("/admin/experience")
-  redirect("/admin/experience")
+  return { success: true }
 }
 
 export async function deleteExperience(id: string) {

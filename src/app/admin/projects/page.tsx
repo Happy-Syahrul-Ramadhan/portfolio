@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { Plus, Pencil, Trash2, Eye, EyeOff } from "lucide-react"
-import { deleteProject, toggleProjectPublish } from "@/app/actions/project"
+import { Plus, Pencil } from "lucide-react"
+import ProjectActions from "./ProjectActions"
 
 export const dynamic = "force-dynamic"
 
@@ -47,31 +47,15 @@ export default async function ManageProjects() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  {/* Toggle publish */}
-                  <form action={async () => {
-                    "use server"
-                    await toggleProjectPublish(project.id, project.published)
-                  }}>
-                    <button type="submit" title={project.published ? "Unpublish" : "Publish"}
-                      className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">
-                      {project.published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </form>
-                  {/* Edit */}
+                  <ProjectActions
+                    projectId={project.id}
+                    projectTitle={project.title}
+                    isPublished={project.published}
+                  />
                   <Link href={`/admin/projects/${project.id}/edit`}
                     className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">
                     <Pencil className="h-4 w-4" />
                   </Link>
-                  {/* Delete */}
-                  <form action={async () => {
-                    "use server"
-                    await deleteProject(project.id)
-                  }}>
-                    <button type="submit" title="Delete"
-                      className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-destructive/10 text-destructive h-9 w-9">
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </form>
                 </div>
               </div>
             ))}

@@ -45,7 +45,7 @@ export async function createProject(formData: FormData) {
   revalidatePath("/admin/projects")
   revalidatePath("/project")
   revalidatePath("/")
-  redirect("/admin/projects")
+  return { success: true }
 }
 
 export async function updateProject(id: string, formData: FormData) {
@@ -82,7 +82,7 @@ export async function updateProject(id: string, formData: FormData) {
   revalidatePath("/admin/projects")
   revalidatePath("/project")
   revalidatePath("/")
-  redirect("/admin/projects")
+  return { success: true }
 }
 
 export async function toggleProjectPublish(id: string, published: boolean) {

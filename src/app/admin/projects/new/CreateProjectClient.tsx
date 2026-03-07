@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import dynamic from "next/dynamic"
 import ImageUploader from "@/app/components/ImageUploader"
+import { useToast } from "@/app/components/ToastProvider"
 
 const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), { ssr: false })
 
@@ -13,6 +14,7 @@ export default function CreateProjectClient() {
   const [content, setContent] = useState("")
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState("")
+  const { showToast } = useToast()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,9 +23,14 @@ export default function CreateProjectClient() {
     formData.set("content", content)
 
     startTransition(async () => {
-      const { createProject } = await import("@/app/actions/project")
-      await createProject(formData)
-      router.push("/admin/projects")
+      try {
+        const { createProject } = await import("@/app/actions/project")
+        await createProject(formData)
+        showToast("Project created successfully!", "success")
+        setTimeout(() => router.push("/admin/projects"), 1000)
+      } catch (err) {
+        showToast("Failed to create project", "error")
+      }
     })
   }
 

@@ -1,8 +1,10 @@
 "use client"
 
+import { useTransition } from "react"
 import Link from "next/link"
 import { Plus, Eye, EyeOff, Pencil, Trash2 } from "lucide-react"
 import { toggleCertificatePublish, deleteCertificate } from "@/app/actions/certificate"
+import { useToast } from "@/app/components/ToastProvider"
 
 type Certificate = {
   id: string
@@ -14,13 +16,34 @@ type Certificate = {
 }
 
 export default function CertificatesList({ certificates }: { certificates: Certificate[] }) {
-  const handleDelete = async (e: React.FormEvent<HTMLFormElement>, id: string) => {
-    e.preventDefault()
-    if (!confirm("Are you sure you want to delete this certificate?")) {
-      return
-    }
-    const formData = new FormData(e.currentTarget)
-    await deleteCertificate(id)
+  const [isPending, startTransition] = useTransition()
+  const { showToast } = useToast()
+
+  const handleTogglePublish = (id: string, title: string, isPublished: boolean) => {
+    startTransition(async () => {
+      try {
+        await toggleCertificatePublish(id, isPublished)
+        showToast(
+          isPublished ? `"${title}" unpublished` : `"${title}" published`,
+          "success"
+        )
+      } catch (error) {
+        showToast("Failed to update certificate", "error")
+      }
+    })
+  }
+
+  const handleDelete = (id: string, title: string) => {
+    if (!confirm(`Delete "${title}"?`)) return
+
+    startTransition(async () => {
+      try {
+        await deleteCertificate(id)
+        showToast(`"${title}" deleted`, "success")
+      } catch (error) {
+        showToast("Failed to delete certificate", "error")
+      }
+    })
   }
 
   if (certificates.length === 0) {
@@ -66,23 +89,22 @@ export default function CertificatesList({ certificates }: { certificates: Certi
           </div>
 
           <div className="flex items-center gap-2">
-            <form action={toggleCertificatePublish.bind(null, cert.id, cert.published)}>
-              <button
-                type="submit"
-                className={`rounded-lg p-2 text-sm transition-colors ${
-                  cert.published
-                    ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                }`}
-                title={cert.published ? "Published" : "Unpublished"}
-              >
-                {cert.published ? (
-                  <Eye className="h-4 w-4" />
-                ) : (
-                  <EyeOff className="h-4 w-4" />
-                )}
-              </button>
-            </form>
+            <button
+              onClick={() => handleTogglePublish(cert.id, cert.title, cert.published)}
+              disabled={isPending}
+              className={`rounded-lg p-2 text-sm transition-colors disabled:opacity-50 ${
+                cert.published
+                  ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+              title={cert.published ? "Published" : "Unpublished"}
+            >
+              {cert.published ? (
+                <Eye className="h-4 w-4" />
+              ) : (
+                <EyeOff className="h-4 w-4" />
+              )}
+            </button>
 
             <Link
               href={`/admin/certificates/${cert.id}/edit`}
@@ -91,14 +113,13 @@ export default function CertificatesList({ certificates }: { certificates: Certi
               <Pencil className="h-4 w-4" />
             </Link>
 
-            <form onSubmit={(e) => handleDelete(e, cert.id)}>
-              <button
-                type="submit"
-                className="rounded-lg p-2 text-sm bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </form>
+            <button
+              onClick={() => handleDelete(cert.id, cert.title)}
+              disabled={isPending}
+              className="rounded-lg p-2 text-sm bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors disabled:opacity-50"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
           </div>
         </div>
       ))}

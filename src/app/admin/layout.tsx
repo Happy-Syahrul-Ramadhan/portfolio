@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award } from "lucide-react"
+import { ToastProvider } from "../components/ToastProvider"
 
 export default function AdminLayout({
   children,
@@ -7,7 +8,8 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen -mt-8 -mx-4 pb-20 sm:-mt-8">
+    <ToastProvider>
+      <div className="flex min-h-screen -mt-8 -mx-4 pb-20 sm:-mt-8">
       {/* Sidebar */}
       <aside className="w-64 border-r bg-card hidden md:block">
         <div className="flex h-16 items-center px-6 border-b">
@@ -87,5 +89,6 @@ export default function AdminLayout({
         </div>
       </main>
     </div>
+    </ToastProvider>
   )
 }

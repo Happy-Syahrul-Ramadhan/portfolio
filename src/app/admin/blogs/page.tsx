@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { Plus, Pencil, Trash2, Eye, EyeOff, ExternalLink } from "lucide-react"
-import { deleteBlog, toggleBlogPublish } from "@/app/actions/blog"
+import { Plus, Pencil, ExternalLink } from "lucide-react"
+import BlogActions from "./BlogActions"
 
 export const dynamic = "force-dynamic"
 
@@ -47,36 +47,19 @@ export default async function ManageBlogs() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  {/* Toggle publish */}
-                  <form action={async () => {
-                    "use server"
-                    await toggleBlogPublish(blog.id, blog.published)
-                  }}>
-                    <button type="submit" title={blog.published ? "Unpublish" : "Publish"}
-                      className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">
-                      {blog.published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </form>
-                  {/* View public page */}
+                  <BlogActions
+                    blogId={blog.id}
+                    blogTitle={blog.title}
+                    isPublished={blog.published}
+                  />
                   <Link href={`/blog/${blog.slug}`} target="_blank" title="View"
                     className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">
                     <ExternalLink className="h-4 w-4" />
                   </Link>
-                  {/* Edit */}
                   <Link href={`/admin/blogs/${blog.id}/edit`}
                     className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">
                     <Pencil className="h-4 w-4" />
                   </Link>
-                  {/* Delete */}
-                  <form action={async () => {
-                    "use server"
-                    await deleteBlog(blog.id)
-                  }}>
-                    <button type="submit" title="Delete"
-                      className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-destructive/10 text-destructive h-9 w-9">
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </form>
                 </div>
               </div>
             ))}
