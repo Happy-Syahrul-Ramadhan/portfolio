@@ -17,6 +17,8 @@ model Project {
   imageUrl    String?  @map("image_url")
   link        String?
   published   Boolean  @default(false)
+  slug        String   @unique @default("")
+  hashtags    String?
 
   @@map("projects")
 }
@@ -28,8 +30,9 @@ model Blog {
   excerpt   String
   content   String
   slug      String   @unique
-  imageUrl  String?  @map("image_url")
   published Boolean  @default(false)
+  imageUrl  String?  @map("image_url")
+  hashtags  String?
 
   @@map("blogs")
 }
@@ -69,6 +72,24 @@ model WorkExperience {
   logoUrl     String?  @map("logo_url")
   current     Boolean  @default(false)
   order       Int      @default(0)
+  skills      String?
 
   @@map("work_experiences")
+}
+
+model Certificate {
+  id            String   @id @default(uuid()) @db.Uuid
+  createdAt     DateTime @default(now()) @map("created_at")
+  title         String
+  description   String
+  imageUrl      String   @map("image_url")
+  issuer        String?
+  issueDate     DateTime? @map("issue_date")
+  credentialUrl String? @map("credential_url")
+  credentialId  String? @map("credential_id")
+  skills        String?
+  published     Boolean  @default(false)
+  order         Int      @default(0)
+
+  @@map("certificates")
 }

@@ -28,7 +28,7 @@ export default async function ProjectPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
           {projects.map((project) => (
-            <div key={project.id}
+            <Link key={project.id} href={`/project/${project.slug}`}
               className="flex flex-col group rounded-2xl border bg-card text-card-foreground overflow-hidden hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 relative">
               <div className="relative">
                 {project.imageUrl ? (
@@ -55,14 +55,13 @@ export default async function ProjectPage() {
                 <h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">{project.title}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">{project.description}</p>
                 {project.link && (
-                  <Link href={project.link} target="_blank"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-primary/80 hover:text-primary transition-colors mt-2 group/link">
-                    View Project
-                    <ExternalLink className="h-3.5 w-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </Link>
+                  <div className="inline-flex items-center gap-1.5 text-sm font-medium text-primary/80 hover:text-primary transition-colors mt-2">
+                    View Live Project
+                    <ExternalLink className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

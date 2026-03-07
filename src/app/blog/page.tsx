@@ -17,7 +17,7 @@ export default async function BlogPage() {
           <BookOpen className="h-8 w-8" /> Blog
         </h1>
         <p className="text-lg text-muted-foreground">
-          Thoughts, learnings, and experiences about software engineering.
+          Thoughts, learnings, and experiences.
         </p>
       </div>
 

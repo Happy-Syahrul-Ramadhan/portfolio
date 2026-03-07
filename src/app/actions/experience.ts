@@ -12,11 +12,12 @@ export async function createExperience(formData: FormData) {
   const logoUrl = formData.get("logoUrl") as string || null
   const current = formData.get("current") === "true"
   const order = parseInt(formData.get("order") as string || "0")
+  const skills = formData.get("skills") as string || null
 
   if (!company || !role || !period) throw new Error("Company, role, and period are required")
 
   await prisma.workExperience.create({
-    data: { company, role, period, description, logoUrl, current, order },
+    data: { company, role, period, description, logoUrl, current, order, skills },
   })
 
   revalidatePath("/")
@@ -33,10 +34,11 @@ export async function updateExperience(id: string, formData: FormData) {
   const logoUrl = formData.get("logoUrl") as string || null
   const current = formData.get("current") === "true"
   const order = parseInt(formData.get("order") as string || "0")
+  const skills = formData.get("skills") as string || null
 
   await prisma.workExperience.update({
     where: { id },
-    data: { company, role, period, description, logoUrl, current, order },
+    data: { company, role, period, description, logoUrl, current, order, skills },
   })
 
   revalidatePath("/")

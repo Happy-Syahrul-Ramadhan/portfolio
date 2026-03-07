@@ -13,6 +13,7 @@ interface Experience {
   logoUrl: string | null
   current: boolean
   order: number
+  skills: string | null
 }
 
 interface WorkExperienceSectionProps {
@@ -113,9 +114,22 @@ export default function WorkExperienceSection({ experiences }: WorkExperienceSec
                 </div>
 
                 {exp.description && (
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1 break-words whitespace-pre-wrap text-justify">
                     {exp.description}
                   </p>
+                )}
+
+                {exp.skills && (
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {exp.skills.split(',').map((skill, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
+                      >
+                        {skill.trim()}
+                      </span>
+                    ))}
+                  </div>
                 )}
               </div>
 

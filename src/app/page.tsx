@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { MapPin, Mail, Github, Linkedin, Twitter, Globe, User } from "lucide-react"
+import { MapPin, Mail, Github, Linkedin, Twitter, Globe, User, Download } from "lucide-react"
 import Link from "next/link"
 import WorkExperienceSection from "./components/WorkExperienceSection"
 import ProjectsSection from "./components/ProjectsSection"
@@ -25,7 +25,6 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-20 mt-12 mb-20">
-
       {/* ── HERO ──────────────────────────────────────────── */}
       <section className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
         <div className="flex-shrink-0">
@@ -56,24 +55,27 @@ export default async function Home() {
           <div className="flex items-center gap-3 mt-2">
             <Link href="/project" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-6">View Projects</Link>
             <Link href="/blog" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-10 px-6">Read Blog</Link>
+            <a href="/Happy Syahrul Ramadhan-resume.pdf" download className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors border border-border bg-transparent hover:bg-accent h-10 px-6">
+              <Download className="h-4 w-4" />
+              Download CV
+            </a>
           </div>
         </div>
       </section>
 
       {/* ── ABOUT ─────────────────────────────────────────── */}
       {bio && (
-        <section className="relative bg-card p-8 rounded-2xl border border-border/50 flex flex-col gap-4 overflow-hidden">
-          {/* Decorative background */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0"></div>
-          <div className="relative z-10">
-            <h2 className="text-2xl font-bold font-heading flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <User className="h-5 w-5 text-primary" />
-              </div>
-              About Me
-            </h2>
+        <section className="flex flex-col gap-4">
+          <h2 className="text-2xl font-bold font-heading flex items-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <User className="h-5 w-5 text-primary" />
+            </div>
+            About Me
+          </h2>
+          <div className="relative bg-card p-8 rounded-2xl border border-border/50 overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0"></div>
+            <p className="text-muted-foreground leading-relaxed whitespace-pre-line relative z-10 text-justify">{bio}</p>
           </div>
-          <p className="text-muted-foreground leading-relaxed whitespace-pre-line relative z-10">{bio}</p>
         </section>
       )}
 

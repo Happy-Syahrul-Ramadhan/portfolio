@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase } from "lucide-react"
+import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award } from "lucide-react"
 
 export default function AdminLayout({
   children,
@@ -43,6 +43,13 @@ export default function AdminLayout({
           >
             <Briefcase className="h-4 w-4" />
             Experience
+          </Link>
+          <Link
+            href="/admin/certificates"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent text-foreground transition-colors"
+          >
+            <Award className="h-4 w-4" />
+            Certificates
           </Link>
           <div className="mt-8">
             <h4 className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">

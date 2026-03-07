@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import BlogContent from "./BlogContent"
+import ShareButtons from "@/app/components/ShareButtons"
 
 export const dynamic = "force-dynamic"
 
@@ -35,7 +36,7 @@ export default async function BlogPostPage({
         </div>
       )}
 
-      <header className="flex flex-col gap-3 border-b pb-8">
+      <header className="flex flex-col gap-3">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight font-heading leading-tight">
           {blog.title}
         </h1>
@@ -48,6 +49,12 @@ export default async function BlogPostPage({
         </time>
         <p className="text-lg text-muted-foreground mt-2">{blog.excerpt}</p>
       </header>
+
+      <ShareButtons 
+        title={blog.title} 
+        url={`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${blog.slug}`}
+        hashtags={blog.hashtags || undefined}
+      />
 
       <div
         className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-heading prose-a:text-primary prose-img:rounded-xl prose-img:border prose-img:border-border"

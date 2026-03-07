@@ -11,6 +11,7 @@ interface Experience {
   logoUrl: string | null
   current: boolean
   order: number
+  skills: string | null
 }
 
 interface ExperienceListProps {
@@ -118,9 +119,23 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
               {/* Description */}
               {exp.description && (
                 <div className="pt-2 border-t border-border/50">
-                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap break-words text-justify">
                     {exp.description}
                   </p>
+                </div>
+              )}
+
+              {/* Skills */}
+              {exp.skills && (
+                <div className="flex flex-wrap gap-2 pt-3">
+                  {exp.skills.split(',').map((skill, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
+                    >
+                      {skill.trim()}
+                    </span>
+                  ))}
                 </div>
               )}
             </div>

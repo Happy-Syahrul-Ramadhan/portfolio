@@ -8,6 +8,7 @@ interface Project {
   id: string
   title: string
   description: string
+  slug: string
   imageUrl: string | null
   link: string | null
   technologies?: string[]
@@ -21,7 +22,7 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set())
-  const itemRefs = useRef<Map<string, HTMLDivElement>>(new Map())
+  const itemRefs = useRef<Map<string, HTMLElement>>(new Map())
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,7 +49,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     return () => observer.disconnect()
   }, [projects])
 
-  const setItemRef = (id: string, element: HTMLDivElement | null) => {
+  const setItemRef = (id: string, element: HTMLElement | null) => {
     if (element) {
       itemRefs.current.set(id, element)
     } else {
@@ -80,8 +81,9 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           const isVisible = visibleItems.has(project.id)
 
           return (
-            <div
+            <Link
               key={project.id}
+              href={`/project/${project.slug}`}
               ref={(el) => setItemRef(project.id, el)}
               data-id={project.id}
               className={`
@@ -102,20 +104,10 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 </p>
               </div>
               
-              {project.link ? (
-                <Link
-                  href={project.link}
-                  target="_blank"
-                  className="flex-shrink-0 w-9 h-9 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-primary/10 transition-colors"
-                >
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
-                </Link>
-              ) : (
-                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-muted/50 flex items-center justify-center">
-                  <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                </div>
-              )}
-            </div>
+              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+              </div>
+            </Link>
           )
         })}
       </div>

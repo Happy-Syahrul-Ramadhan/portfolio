@@ -17,13 +17,14 @@ export async function createBlog(formData: FormData) {
   const content = formData.get("content") as string
   const imageUrl = formData.get("imageUrl") as string
   const published = formData.get("published") === "true"
+  const hashtags = formData.get("hashtags") as string
   let slug = formData.get("slug") as string
 
   if (!title || !excerpt || !content) return { error: "Title, excerpt, and content are required" }
   if (!slug) slug = generateSlug(title)
 
   await prisma.blog.create({
-    data: { title, excerpt, content, slug, imageUrl, published },
+    data: { title, excerpt, content, slug, imageUrl, published, hashtags },
   })
 
   revalidatePath("/admin/blogs")
@@ -37,6 +38,7 @@ export async function updateBlog(id: string, formData: FormData) {
   const content = formData.get("content") as string
   const imageUrl = formData.get("imageUrl") as string
   const published = formData.get("published") === "true"
+  const hashtags = formData.get("hashtags") as string
   let slug = formData.get("slug") as string
 
   if (!title || !excerpt || !content) return { error: "Title, excerpt, and content are required" }
@@ -44,7 +46,7 @@ export async function updateBlog(id: string, formData: FormData) {
 
   await prisma.blog.update({
     where: { id },
-    data: { title, excerpt, content, slug, imageUrl, published },
+    data: { title, excerpt, content, slug, imageUrl, published, hashtags },
   })
 
   revalidatePath("/admin/blogs")

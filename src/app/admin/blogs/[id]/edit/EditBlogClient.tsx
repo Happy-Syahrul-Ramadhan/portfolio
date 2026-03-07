@@ -17,6 +17,7 @@ interface EditBlogClientProps {
     slug: string
     imageUrl: string | null
     published: boolean
+    hashtags: string | null
   }
 }
 
@@ -71,6 +72,13 @@ export default function EditBlogClient({ blog }: EditBlogClientProps) {
         </div>
 
         <ImageUploader name="imageUrl" label="Thumbnail / Cover Image" defaultValue={blog.imageUrl || ""} />
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium" htmlFor="hashtags">Hashtags (comma separated, e.g: webdev,nextjs,typescript)</label>
+          <input id="hashtags" name="hashtags" defaultValue={blog.hashtags || ""}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            placeholder="webdev,nextjs,react" />
+        </div>
 
         <div className="space-y-2">
           <label className="text-sm font-medium">Content</label>

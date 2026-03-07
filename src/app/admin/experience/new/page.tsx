@@ -1,6 +1,9 @@
+"use client"
+
 import { createExperience } from "@/app/actions/experience"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import ImageUploader from "@/app/components/ImageUploader"
 
 export default function NewExperience() {
   return (
@@ -48,6 +51,17 @@ export default function NewExperience() {
           <textarea id="description" name="description" rows={4}
             className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
             placeholder="Describe your responsibilities and achievements..." />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium" htmlFor="skills">Related Skills</label>
+          <input id="skills" name="skills" type="text"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            placeholder="e.g., React, Node.js, TypeScript (comma-separated)" />
+        </div>
+
+        <div className="space-y-2">
+          <ImageUploader name="logoUrl" label="Company Logo" />
         </div>
 
         <div className="flex items-center gap-2">

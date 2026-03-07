@@ -1,13 +1,14 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { FolderGit2, FileText, ArrowRight } from "lucide-react"
+import { FolderGit2, FileText, Award, ArrowRight } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
 export default async function AdminDashboard() {
-  const [projectCount, blogCount] = await Promise.all([
+  const [projectCount, blogCount, certificateCount] = await Promise.all([
     prisma.project.count(),
     prisma.blog.count(),
+    prisma.certificate.count(),
   ])
 
   return (
@@ -47,6 +48,22 @@ export default async function AdminDashboard() {
             <p className="text-xs text-muted-foreground flex items-center mt-4">
               <Link href="/admin/blogs" className="text-primary hover:underline flex items-center gap-1">
                 Manage Blogs <ArrowRight className="h-3 w-3" />
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        {/* Certificate Card */}
+        <div className="rounded-xl border bg-card text-card-foreground shadow-sm flex flex-col">
+          <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+            <h3 className="tracking-tight text-sm font-medium">Total Certificates</h3>
+            <Award className="h-4 w-4 text-muted-foreground" />
+          </div>
+          <div className="p-6 pt-0">
+            <div className="text-2xl font-bold">{certificateCount}</div>
+            <p className="text-xs text-muted-foreground flex items-center mt-4">
+              <Link href="/admin/certificates" className="text-primary hover:underline flex items-center gap-1">
+                Manage Certificates <ArrowRight className="h-3 w-3" />
               </Link>
             </p>
           </div>
