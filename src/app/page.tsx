@@ -16,34 +16,33 @@ import BlogSection from "./components/BlogSection";
 import PublicationsSection from "./components/PublicationsSection";
 import HKISection from "./components/HKISection";
 
-// ISR: revalidate every hour; admin actions call revalidatePath("/") for immediate updates
-export const revalidate = 3600;
+// Always render fresh — ensures frontend reflects admin changes immediately
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [profile, experiences, publications, hkis, projects, blogs] =
-    await Promise.all([
-      prisma.profile.findUnique({ where: { id: "singleton" } }),
-      prisma.workExperience.findMany({
-        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-      }),
-      prisma.publication.findMany({
-        where: { published: true },
-        orderBy: [{ order: "asc" }, { year: "desc" }],
-      }),
-      prisma.intellectualProperty.findMany({
-        orderBy: [{ order: "asc" }, { year: "desc" }],
-      }),
-      prisma.project.findMany({
-        where: { published: true },
-        orderBy: { createdAt: "desc" },
-        take: 6,
-      }),
-      prisma.blog.findMany({
-        where: { published: true },
-        orderBy: { createdAt: "desc" },
-        take: 4,
-      }),
-    ]);
+  const profile = await prisma.profile.findUnique({
+    where: { id: "singleton" },
+  });
+  const experiences = await prisma.workExperience.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+  });
+  const publications = await prisma.publication.findMany({
+    where: { published: true },
+    orderBy: [{ order: "asc" }, { year: "desc" }],
+  });
+  const hkis = await prisma.intellectualProperty.findMany({
+    orderBy: [{ order: "asc" }, { year: "desc" }],
+  });
+  const projects = await prisma.project.findMany({
+    where: { published: true },
+    orderBy: { createdAt: "desc" },
+    take: 6,
+  });
+  const blogs = await prisma.blog.findMany({
+    where: { published: true },
+    orderBy: { createdAt: "desc" },
+    take: 4,
+  });
 
   const name = profile?.name || "Your Name";
   const title = profile?.title || "Software Engineer";

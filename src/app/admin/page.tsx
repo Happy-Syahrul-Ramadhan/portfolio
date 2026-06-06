@@ -12,19 +12,11 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [
-    projectCount,
-    blogCount,
-    certificateCount,
-    publicationCount,
-    hkiCount,
-  ] = await Promise.all([
-    prisma.project.count(),
-    prisma.blog.count(),
-    prisma.certificate.count(),
-    prisma.publication.count(),
-    prisma.intellectualProperty.count(),
-  ]);
+  const projectCount = await prisma.project.count();
+  const blogCount = await prisma.blog.count();
+  const certificateCount = await prisma.certificate.count();
+  const publicationCount = await prisma.publication.count();
+  const hkiCount = await prisma.intellectualProperty.count();
 
   return (
     <div className="flex flex-col gap-8">
