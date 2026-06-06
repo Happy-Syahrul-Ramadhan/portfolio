@@ -79,11 +79,12 @@ export default function ExperienceList({
               </div>
             </div>
 
-            {/* Description */}
+            {/* Description (render HTML from editor) */}
             {exp.description && (
-              <p className="text-sm text-muted-foreground leading-relaxed text-justify border-t border-border/50 pt-3">
-                {exp.description}
-              </p>
+              <div
+                className="prose prose-sm prose-neutral dark:prose-invert max-w-none text-sm text-muted-foreground leading-relaxed text-justify border-t border-border/50 pt-3"
+                dangerouslySetInnerHTML={{ __html: exp.description }}
+              />
             )}
 
             {/* Skills */}

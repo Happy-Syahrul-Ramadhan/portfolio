@@ -1,14 +1,18 @@
 "use client"
 
 import { createExperience } from "@/app/actions/experience"
-import { useTransition } from "react"
+import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import dynamic from "next/dynamic"
 import ImageUploader from "@/app/components/ImageUploader"
 import { useToast } from "@/app/components/ToastProvider"
 
+const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), { ssr: false })
+
 export default function NewExperience() {
+  const [content, setContent] = useState("")
   const [isPending, startTransition] = useTransition()
   const { showToast } = useToast()
   const router = useRouter()
@@ -16,6 +20,7 @@ export default function NewExperience() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
+    formData.set("description", content)
 
     startTransition(async () => {
       try {
@@ -70,9 +75,7 @@ export default function NewExperience() {
 
         <div className="space-y-2">
           <label className="text-sm font-medium" htmlFor="description">Description</label>
-          <textarea id="description" name="description" rows={4}
-            className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
-            placeholder="Describe your responsibilities and achievements..." />
+          <TiptapEditor value={content} onChange={setContent} placeholder="Describe your responsibilities and achievements..." />
         </div>
 
         <div className="space-y-2">

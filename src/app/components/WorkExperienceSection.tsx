@@ -67,11 +67,12 @@ export default function WorkExperienceSection({
                 <span>{exp.period}</span>
               </div>
 
-              {/* Description */}
+              {/* Description (render HTML from editor) */}
               {exp.description && (
-                <p className="text-sm text-muted-foreground leading-relaxed mt-0.5 text-justify">
-                  {exp.description}
-                </p>
+                <div
+                  className="prose prose-sm prose-neutral dark:prose-invert max-w-none text-sm text-muted-foreground leading-relaxed mt-0.5 text-justify"
+                  dangerouslySetInnerHTML={{ __html: exp.description }}
+                />
               )}
 
               {/* Skills */}
