@@ -109,7 +109,7 @@ export default async function Home() {
         {(location || email) && (
           <div className="p-4 bg-card border border-border/60 rounded-2xl flex flex-col gap-2.5">
             <h3 className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
-              Kontak
+              Contact
             </h3>
             {location && (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -133,7 +133,7 @@ export default async function Home() {
         {(github || linkedin || googleScholar || website) && (
           <div className="p-4 bg-card border border-border/60 rounded-2xl flex flex-col gap-2.5">
             <h3 className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
-              Profil
+              Social Links
             </h3>
             {github && (
               <Link
@@ -186,13 +186,13 @@ export default async function Home() {
             className="inline-flex items-center justify-center gap-2 rounded-xl text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4"
           >
             <Download className="h-4 w-4" />
-            Unduh CV
+            Download CV
           </a>
           <Link
             href="/project"
             className="inline-flex items-center justify-center rounded-xl text-sm font-medium transition-colors border border-border hover:bg-accent h-10 px-4"
           >
-            Lihat Proyek
+            View Projects
           </Link>
         </div>
       </aside>
@@ -204,7 +204,7 @@ export default async function Home() {
           <section>
             <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
               <User className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-              <h2 className="text-xl font-bold font-heading">Tentang Saya</h2>
+              <h2 className="text-xl font-bold font-heading">About Me</h2>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line text-justify">
               {bio}

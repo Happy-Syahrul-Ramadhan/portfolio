@@ -25,7 +25,7 @@ export default function WorkExperienceSection({
       {/* Section Header */}
       <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
         <Briefcase className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-        <h2 className="text-xl font-bold font-heading">Pengalaman Kerja</h2>
+        <h2 className="text-xl font-bold font-heading">Work Experience</h2>
       </div>
 
       {/* Timeline */}
@@ -46,7 +46,7 @@ export default function WorkExperienceSection({
                 </h3>
                 {exp.current && (
                   <span className="px-2 py-0.5 text-[11px] font-medium bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 rounded-full">
-                    Saat ini
+                    Current
                   </span>
                 )}
               </div>
@@ -98,7 +98,7 @@ export default function WorkExperienceSection({
           href="/experience"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          Lihat semua pengalaman
+          View all work experience
           <ExternalLink className="h-3.5 w-3.5" />
         </Link>
       </div>

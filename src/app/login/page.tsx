@@ -29,10 +29,10 @@ export default function LoginPage() {
         router.refresh()
       } else {
         const data = await res.json()
-        setError(data.error || "Username atau password salah")
+        setError(data.error || "Incorrect username or password")
       }
     } catch {
-      setError("Terjadi kesalahan saat login")
+      setError("An error occurred while signing in")
     } finally {
       setLoading(false)
     }
@@ -49,7 +49,7 @@ export default function LoginPage() {
             Admin Login
           </h1>
           <p className="text-sm text-muted-foreground">
-            Masukkan kredensial Anda untuk mengakses dashboard
+            Enter your credentials to access the dashboard
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export default function LoginPage() {
                   <Eye className="h-4 w-4" />
                 )}
                 <span className="sr-only">
-                  {showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                  {showPassword ? "Hide password" : "Show password"}
                 </span>
               </button>
             </div>
@@ -110,7 +110,7 @@ export default function LoginPage() {
             disabled={loading}
             className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-4 py-2 w-full disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
-            {loading ? "Masuk..." : "Masuk"}
+            {loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
       </div>

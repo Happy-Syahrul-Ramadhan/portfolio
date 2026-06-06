@@ -19,13 +19,13 @@ export default function BlogSection({ blogs }: { blogs: Blog[] }) {
       <div className="flex items-center justify-between mb-5 pb-3 border-b border-border">
         <div className="flex items-center gap-2">
           <BookOpen className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-          <h2 className="text-xl font-bold font-heading">Tulisan Terbaru</h2>
+          <h2 className="text-xl font-bold font-heading">Latest Posts</h2>
         </div>
         <Link
           href="/blog"
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          Lihat semua →
+          View all →
         </Link>
       </div>
 

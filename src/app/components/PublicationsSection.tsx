@@ -31,7 +31,7 @@ export default function PublicationsSection({
     <section>
       <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
         <BookMarked className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-        <h2 className="text-xl font-bold font-heading">Publikasi Ilmiah</h2>
+        <h2 className="text-xl font-bold font-heading">Publications</h2>
       </div>
 
       <ol className="flex flex-col gap-5">

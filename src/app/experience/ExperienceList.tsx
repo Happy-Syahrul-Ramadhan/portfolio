@@ -19,7 +19,7 @@ export default function ExperienceList({
     return (
       <div className="flex items-center justify-center py-24 border rounded-2xl border-dashed">
         <p className="text-muted-foreground">
-          Belum ada data pengalaman kerja.
+          No work experience data available yet.
         </p>
       </div>
     );
@@ -41,7 +41,7 @@ export default function ExperienceList({
               <h3 className="font-bold text-lg leading-tight">{exp.role}</h3>
               {exp.current && (
                 <span className="px-2.5 py-0.5 text-xs font-semibold bg-primary/15 text-primary rounded-full border border-primary/20">
-                  Posisi Saat Ini
+                  Current Position
                 </span>
               )}
             </div>

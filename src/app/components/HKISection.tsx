@@ -23,7 +23,7 @@ export default function HKISection({
     <section>
       <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
         <Shield className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-        <h2 className="text-xl font-bold font-heading">Hak Kekayaan Intelektual</h2>
+        <h2 className="text-xl font-bold font-heading">Intellectual Property</h2>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -66,7 +66,7 @@ export default function HKISection({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-shrink-0 text-muted-foreground hover:text-primary transition-colors"
-                title="Lihat dokumen"
+                title="View document"
               >
                 <ExternalLink className="h-4 w-4" />
               </a>
