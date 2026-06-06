@@ -94,3 +94,35 @@ model Certificate {
 
   @@map("certificates")
 }
+
+model Publication {
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  title     String
+  authors   String
+  journal   String
+  volume    String?
+  year      Int
+  doi       String?
+  url       String?
+  abstract  String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+
+  @@map("publications")
+}
+
+model IntellectualProperty {
+  id             String   @id @default(uuid()) @db.Uuid
+  createdAt      DateTime @default(now()) @map("created_at")
+  registrationNo String   @map("registration_no")
+  title          String
+  description    String?
+  type           String   @default("Hak Cipta")
+  year           Int
+  issuer         String   @default("Kemenkumham RI")
+  url            String?
+  order          Int      @default(0)
+
+  @@map("intellectual_properties")
+}

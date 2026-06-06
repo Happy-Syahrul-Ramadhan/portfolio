@@ -1,11 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { LogOut, LayoutDashboard, FileText, FolderGit2, Settings, Briefcase, Award, Menu, X, FileDown } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import {
+  LogOut,
+  LayoutDashboard,
+  FileText,
+  FolderGit2,
+  Settings,
+  Briefcase,
+  Award,
+  Menu,
+  X,
+  FileDown,
+  BookOpen,
+  Shield,
+} from "lucide-react";
 
 export default function AdminMobileMenu() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -27,10 +40,17 @@ export default function AdminMobileMenu() {
           />
           <aside className="fixed top-0 left-0 bottom-0 w-64 bg-card border-r z-50 md:hidden">
             <div className="flex h-16 items-center justify-between px-6 border-b">
-              <Link href="/admin" className="font-heading font-bold tracking-tight" onClick={() => setIsOpen(false)}>
+              <Link
+                href="/admin"
+                className="font-heading font-bold tracking-tight"
+                onClick={() => setIsOpen(false)}
+              >
                 Admin Panel
               </Link>
-              <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-accent rounded-md">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-1 hover:bg-accent rounded-md"
+              >
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -75,6 +95,22 @@ export default function AdminMobileMenu() {
                 <Award className="h-4 w-4" />
                 Certificates
               </Link>
+              <Link
+                href="/admin/publications"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent text-foreground transition-colors"
+              >
+                <BookOpen className="h-4 w-4" />
+                Publications
+              </Link>
+              <Link
+                href="/admin/hki"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md hover:bg-accent text-foreground transition-colors"
+              >
+                <Shield className="h-4 w-4" />
+                HKI
+              </Link>
               <div className="mt-8">
                 <h4 className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
                   Settings
@@ -110,5 +146,5 @@ export default function AdminMobileMenu() {
         </>
       )}
     </>
-  )
+  );
 }

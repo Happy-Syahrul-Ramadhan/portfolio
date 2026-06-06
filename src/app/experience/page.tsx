@@ -1,13 +1,13 @@
-import { prisma } from "@/lib/prisma"
-import { Briefcase } from "lucide-react"
-import ExperienceList from "./ExperienceList"
+import { prisma } from "@/lib/prisma";
+import { Briefcase } from "lucide-react";
+import ExperienceList from "./ExperienceList";
 
-export const dynamic = "force-dynamic"
+export const revalidate = 3600;
 
 export default async function ExperiencePage() {
   const experiences = await prisma.workExperience.findMany({
     orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-  })
+  });
 
   return (
     <div className="flex flex-col gap-8 mt-12 mb-20">
@@ -22,5 +22,5 @@ export default async function ExperiencePage() {
 
       <ExperienceList experiences={experiences} />
     </div>
-  )
+  );
 }
