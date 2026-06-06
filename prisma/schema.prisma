@@ -56,7 +56,7 @@ model Profile {
   avatarUrl String? @map("avatar_url")
   github    String  @default("")
   linkedin  String  @default("")
-  twitter   String  @default("")
+  googleScholar String  @default("") @map("google_scholar")
   website   String  @default("")
   cvUrl     String? @map("cv_url")
 

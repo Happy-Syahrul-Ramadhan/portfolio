@@ -4,7 +4,7 @@ import {
   Mail,
   Github,
   Linkedin,
-  Twitter,
+  GraduationCap,
   Globe,
   Download,
   User,
@@ -52,7 +52,7 @@ export default async function Home() {
   const email = profile?.email;
   const avatarUrl = profile?.avatarUrl;
   const cvUrl = profile?.cvUrl || "/Happy Syahrul Ramadhan-resume.pdf";
-  const { github, linkedin, twitter, website } = profile || {};
+  const { github, linkedin, googleScholar, website } = profile || {};
 
   // Split title into tags if comma-separated (e.g. "Data Engineer, Researcher")
   const titleTags = title
@@ -131,7 +131,7 @@ export default async function Home() {
         )}
 
         {/* Social links */}
-        {(github || linkedin || twitter || website) && (
+        {(github || linkedin || googleScholar || website) && (
           <div className="p-4 bg-card border border-border/60 rounded-2xl flex flex-col gap-2.5">
             <h3 className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
               Profil
@@ -156,14 +156,14 @@ export default async function Home() {
                 <span>LinkedIn</span>
               </Link>
             )}
-            {twitter && (
+            {googleScholar && (
               <Link
-                href={twitter}
+                href={googleScholar}
                 target="_blank"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Twitter className="h-3.5 w-3.5 flex-shrink-0" />
-                <span>Twitter / X</span>
+                <GraduationCap className="h-3.5 w-3.5 flex-shrink-0" />
+                <span>Google Scholar</span>
               </Link>
             )}
             {website && (
