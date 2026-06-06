@@ -64,11 +64,8 @@ export default function CertificatesList({ certificates }: { certificates: Certi
   return (
     <div className="grid gap-4">
       {certificates.map((cert) => (
-        <div
-          key={cert.id}
-          className="flex items-center gap-4 rounded-lg border bg-card p-4"
-        >
-          <div className="h-24 w-32 flex-shrink-0 overflow-hidden rounded border bg-muted">
+        <div key={cert.id} className="admin-list-item rounded-lg border bg-card">
+          <div className="h-24 w-full sm:w-32 flex-shrink-0 overflow-hidden rounded border bg-muted">
             <img
               src={cert.imageUrl}
               alt={cert.title}
@@ -76,7 +73,7 @@ export default function CertificatesList({ certificates }: { certificates: Certi
             />
           </div>
 
-          <div className="flex-1 min-w-0">
+          <div className="admin-list-main flex-1">
             <h3 className="font-semibold truncate">{cert.title}</h3>
             <p className="text-sm text-muted-foreground line-clamp-2">
               {cert.description}
@@ -88,13 +85,13 @@ export default function CertificatesList({ certificates }: { certificates: Certi
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="admin-list-actions gap-2">
             <button
               onClick={() => handleTogglePublish(cert.id, cert.title, cert.published)}
               disabled={isPending}
               className={`rounded-lg p-2 text-sm transition-colors disabled:opacity-50 ${
                 cert.published
-                  ? "bg-green-500/10 text-green-500 hover:bg-green-500/20"
+                  ? "bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-500/30"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
               title={cert.published ? "Published" : "Unpublished"}

@@ -96,6 +96,28 @@
     }
 }
 
+@layer components {
+    .admin-page-header {
+        @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .admin-list-item {
+        @apply flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .admin-list-main {
+        @apply min-w-0;
+    }
+
+    .admin-list-actions {
+        @apply flex items-center gap-1 self-end sm:self-auto shrink-0;
+    }
+
+    .status-badge-success {
+        @apply inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300;
+    }
+}
+
 /* Tiptap Editor Styles */
 .ProseMirror {
     outline: none;
@@ -172,6 +194,12 @@
     padding: 0;
     font-size: 0.875rem;
     display: block;
+}
+
+.prose,
+.ProseMirror {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 /* Light mode code blocks */

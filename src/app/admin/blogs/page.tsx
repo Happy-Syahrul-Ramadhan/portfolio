@@ -12,11 +12,11 @@ export default async function ManageBlogs() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight font-heading">Manage Blogs</h1>
+      <div className="admin-page-header">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-heading">Manage Blogs</h1>
         <Link
           href="/admin/blogs/new"
-          className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-4 py-2 gap-2"
+          className="inline-flex w-full sm:w-auto items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary/90 bg-primary text-primary-foreground h-10 px-4 py-2 gap-2"
         >
           <Plus className="h-4 w-4" />
           New Post
@@ -31,22 +31,22 @@ export default async function ManageBlogs() {
         ) : (
           <div className="divide-y">
             {blogs.map((blog) => (
-              <div key={blog.id} className="flex items-center justify-between p-4 hover:bg-accent/50 transition-colors">
-                <div className="flex items-center gap-3">
+              <div key={blog.id} className="admin-list-item hover:bg-accent/50 transition-colors">
+                <div className="admin-list-main flex items-start gap-3">
                   {blog.imageUrl && (
                     <img src={blog.imageUrl} alt="" className="h-12 w-20 object-cover rounded-md border border-border flex-shrink-0" />
                   )}
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold">{blog.title}</h3>
-                      <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${blog.published ? "bg-green-500/15 text-green-600 dark:text-green-400" : "bg-muted text-muted-foreground"}`}>
+                  <div className="admin-list-main flex flex-col gap-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="font-semibold break-words">{blog.title}</h3>
+                      <span className={blog.published ? "status-badge-success" : "px-2 py-0.5 text-xs font-medium rounded-full bg-muted text-muted-foreground"}>
                         {blog.published ? "Published" : "Draft"}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground line-clamp-1 max-w-md">{blog.excerpt}</p>
+                    <p className="text-sm text-muted-foreground line-clamp-2 sm:line-clamp-1">{blog.excerpt}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="admin-list-actions">
                   <BlogActions
                     blogId={blog.id}
                     blogTitle={blog.title}

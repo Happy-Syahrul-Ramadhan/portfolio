@@ -40,7 +40,7 @@ export default function ExperienceList({
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="font-bold text-lg leading-tight">{exp.role}</h3>
               {exp.current && (
-                <span className="px-2.5 py-0.5 text-xs font-semibold bg-primary/15 text-primary rounded-full border border-primary/20">
+                <span className="status-badge-success text-xs font-semibold">
                   Current Position
                 </span>
               )}

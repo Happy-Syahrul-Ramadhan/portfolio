@@ -13,10 +13,10 @@ export default async function ProjectPage() {
   return (
     <div className="flex flex-col gap-8 mt-12 mb-20">
       <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-bold tracking-tight font-heading flex items-center gap-3">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight font-heading flex items-center gap-3">
           <Layers className="h-8 w-8" /> Projects
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-base sm:text-lg text-muted-foreground">
           A collection of my recent work and side projects.
         </p>
       </div>

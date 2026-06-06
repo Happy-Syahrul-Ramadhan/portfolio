@@ -45,7 +45,7 @@ export default function WorkExperienceSection({
                   {exp.role}
                 </h3>
                 {exp.current && (
-                  <span className="px-2 py-0.5 text-[11px] font-medium bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 rounded-full">
+                  <span className="status-badge-success text-[11px]">
                     Current
                   </span>
                 )}

@@ -40,7 +40,7 @@ export default function CertificatesList({ certificates }: { certificates: Certi
     <>
       <div className="flex flex-col gap-8">
         <header className="flex flex-col gap-2">
-          <h1 className="text-4xl font-bold tracking-tight font-heading">Certificates</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight font-heading">Certificates</h1>
           <p className="text-muted-foreground">My professional certifications and achievements</p>
         </header>
 
