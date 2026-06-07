@@ -91,7 +91,7 @@ export default function CertificatesList({ certificates }: { certificates: Certi
               disabled={isPending}
               className={`rounded-lg p-2 text-sm transition-colors disabled:opacity-50 ${
                 cert.published
-                  ? "bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-500/30"
+                  ? "bg-[#14532d] text-white hover:bg-[#0f3f22] dark:bg-[#14532d] dark:text-white dark:hover:bg-[#0f3f22]"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
               title={cert.published ? "Published" : "Unpublished"}

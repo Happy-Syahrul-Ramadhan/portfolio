@@ -60,27 +60,27 @@ export default async function Home() {
     .filter(Boolean);
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-[268px_1fr] gap-8 mt-6 mb-24 items-start">
+    <div className="mt-6 mb-24 flex min-w-0 w-full max-w-full flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:items-start">
       {/* ── LEFT: Sticky Profile Sidebar ─────────────────────── */}
-      <aside className="lg:sticky lg:top-[88px] flex flex-col gap-4 w-full">
+      <aside className="flex w-full max-w-full min-w-0 flex-col gap-4 lg:sticky lg:top-[88px]">
         {/* Avatar + Name */}
-        <div className="flex flex-col items-center text-center gap-3 p-6 bg-card border border-border/60 rounded-2xl">
+        <div className="flex max-w-full flex-col items-center gap-3 rounded-2xl border border-border/60 bg-card p-5 text-center sm:p-6">
           {avatarUrl ? (
             <img
               src={avatarUrl}
               alt={name}
-              className="w-24 h-24 rounded-full object-cover border-2 border-border shadow"
+              className="h-24 w-24 rounded-full border-2 border-border object-cover shadow"
             />
           ) : (
-            <div className="w-24 h-24 rounded-full bg-muted border-2 border-border flex items-center justify-center shadow">
+            <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-border bg-muted shadow">
               <span className="text-3xl font-bold text-muted-foreground font-heading">
                 {name.charAt(0)}
               </span>
             </div>
           )}
 
-          <div>
-            <h1 className="text-xl font-bold font-heading leading-tight">
+          <div className="min-w-0">
+            <h1 className="break-words text-xl font-bold font-heading leading-tight">
               {name}
             </h1>
           </div>
@@ -90,7 +90,7 @@ export default async function Home() {
             {titleTags.map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-0.5 text-xs bg-primary/10 text-primary rounded-full font-medium"
+                className="px-2.5 py-0.5 text-xs rounded-full bg-[#14532d] text-white font-medium"
               >
                 {tag}
               </span>
@@ -99,7 +99,7 @@ export default async function Home() {
 
           {/* Bio (truncated in sidebar) */}
           {bio && (
-            <p className="text-xs text-muted-foreground leading-relaxed line-clamp-4 text-left mt-1">
+            <p className="mt-1 line-clamp-4 break-words text-left text-xs leading-relaxed text-muted-foreground">
               {bio}
             </p>
           )}
@@ -107,14 +107,14 @@ export default async function Home() {
 
         {/* Contact */}
         {(location || email) && (
-          <div className="p-4 bg-card border border-border/60 rounded-2xl flex flex-col gap-2.5">
+          <div className="flex max-w-full flex-col gap-2.5 rounded-2xl border border-border/60 bg-card p-4">
             <h3 className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
               Contact
             </h3>
             {location && (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex min-w-0 items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
-                <span>{location}</span>
+                <span className="break-words">{location}</span>
               </div>
             )}
             {email && (
@@ -131,7 +131,7 @@ export default async function Home() {
 
         {/* Social links */}
         {(github || linkedin || googleScholar || website) && (
-          <div className="p-4 bg-card border border-border/60 rounded-2xl flex flex-col gap-2.5">
+          <div className="flex max-w-full flex-col gap-2.5 rounded-2xl border border-border/60 bg-card p-4">
             <h3 className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
               Social Links
             </h3>
@@ -179,18 +179,18 @@ export default async function Home() {
         )}
 
         {/* Actions */}
-        <div className="flex flex-col gap-2">
+        <div className="flex max-w-full flex-col gap-2">
           <a
             href={cvUrl}
             download
-            className="inline-flex items-center justify-center gap-2 rounded-xl text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#14532d] px-4 text-sm font-medium text-white transition-colors hover:bg-[#0f3f22]"
           >
             <Download className="h-4 w-4" />
             Download CV
           </a>
           <Link
             href="/project"
-            className="inline-flex items-center justify-center rounded-xl text-sm font-medium transition-colors border border-border hover:bg-accent h-10 px-4"
+            className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm font-medium transition-colors hover:bg-accent"
           >
             View Projects
           </Link>
@@ -198,15 +198,15 @@ export default async function Home() {
       </aside>
 
       {/* ── RIGHT: Content Sections ───────────────────────────── */}
-      <div className="flex flex-col gap-10 min-w-0">
+      <div className="flex min-w-0 max-w-full flex-col gap-10">
         {/* About (full bio on right, only shown if bio exists) */}
         {bio && (
-          <section>
-            <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
+          <section className="min-w-0">
+            <div className="mb-5 flex items-center gap-2 border-b border-border pb-3">
               <User className="h-5 w-5 text-muted-foreground flex-shrink-0" />
               <h2 className="text-xl font-bold font-heading">About Me</h2>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line text-justify">
+            <p className="whitespace-pre-line break-words text-sm leading-relaxed text-muted-foreground sm:text-justify">
               {bio}
             </p>
           </section>

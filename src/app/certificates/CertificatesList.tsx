@@ -115,7 +115,7 @@ export default function CertificatesList({ certificates }: { certificates: Certi
                       {cert.skills.split(",").map((skill, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs font-medium"
+                          className="px-2 py-0.5 rounded-md bg-[#14532d] text-white text-xs font-medium"
                         >
                           {skill.trim()}
                         </span>

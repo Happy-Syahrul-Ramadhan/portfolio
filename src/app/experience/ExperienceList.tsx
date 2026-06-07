@@ -93,7 +93,7 @@ export default function ExperienceList({
                 {exp.skills.split(",").map((skill, idx) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
+                    className="px-2.5 py-0.5 text-xs font-medium rounded-full border border-emerald-950/30 bg-[#14532d] text-white"
                   >
                     {skill.trim()}
                   </span>

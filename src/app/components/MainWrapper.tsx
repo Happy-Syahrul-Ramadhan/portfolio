@@ -13,7 +13,7 @@ export function MainWrapper({ children }: { children: ReactNode }) {
 
   // For public pages, render with max-width constraint
   return (
-    <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
+    <main className="flex-1 w-full min-w-0 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-x-hidden">
       {children}
     </main>
   )

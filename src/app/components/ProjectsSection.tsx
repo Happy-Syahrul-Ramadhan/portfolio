@@ -16,15 +16,15 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
   if (projects.length === 0) return null;
 
   return (
-    <section>
-      <div className="flex items-center justify-between mb-5 pb-3 border-b border-border">
-        <div className="flex items-center gap-2">
-          <Layers className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+    <section className="min-w-0">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
+        <div className="flex min-w-0 items-center gap-2">
+          <Layers className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
           <h2 className="text-xl font-bold font-heading">Latest Projects</h2>
         </div>
         <Link
           href="/project"
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="shrink-0 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           View all →
         </Link>
@@ -35,17 +35,17 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
           <Link
             key={project.id}
             href={`/project/${project.slug}`}
-            className="group flex items-center justify-between gap-4 p-4 rounded-xl border border-border/60 bg-card hover:bg-accent hover:border-border transition-all duration-200"
+            className="group flex min-w-0 items-center justify-between gap-3 rounded-xl border border-border/60 bg-card p-4 transition-all duration-200 hover:border-border hover:bg-accent"
           >
-            <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-sm leading-tight mb-1 group-hover:text-primary transition-colors">
+            <div className="min-w-0 flex-1">
+              <h3 className="mb-1 break-words text-sm font-medium leading-tight transition-colors group-hover:text-primary">
                 {project.title}
               </h3>
-              <p className="text-xs text-muted-foreground line-clamp-1">
+              <p className="line-clamp-2 break-words text-xs text-muted-foreground sm:line-clamp-1">
                 {project.description}
               </p>
             </div>
-            <ArrowRight className="h-4 w-4 text-muted-foreground flex-shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
           </Link>
         ))}
       </div>
