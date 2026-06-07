@@ -39,7 +39,7 @@ export default function WorkExperienceSection({
 
             <div className="flex min-w-0 flex-col gap-1.5">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="break-words text-base font-semibold leading-tight">
+                <h3 className="break-words text-lg font-semibold leading-tight sm:text-xl">
                   {exp.role}
                 </h3>
                 {exp.current && (
@@ -57,7 +57,7 @@ export default function WorkExperienceSection({
                     className="h-4 w-4 rounded object-contain"
                   />
                 ) : null}
-                <span className="break-words font-medium text-foreground/80">
+                <span className="break-words text-base font-medium text-foreground/80 sm:text-lg">
                   {exp.company}
                 </span>
                 <span className="text-border">·</span>
@@ -76,7 +76,7 @@ export default function WorkExperienceSection({
                   {exp.skills.split(",").map((skill, idx) => (
                     <span
                       key={idx}
-                      className="rounded border border-border/60 bg-primary/8 px-2 py-0.5 text-[11px] font-medium text-foreground/70"
+                      className="rounded-full border border-emerald-950/30 bg-[#14532d] px-2.5 py-0.5 text-[11px] font-medium text-white"
                     >
                       {skill.trim()}
                     </span>
