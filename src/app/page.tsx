@@ -19,6 +19,14 @@ import HKISection from "./components/HKISection";
 // Always render fresh — ensures frontend reflects admin changes immediately
 export const dynamic = "force-dynamic";
 
+type EducationEntry = {
+  id: string;
+  degree: string;
+  institution: string;
+  major: string;
+  location: string | null;
+};
+
 export default async function Home() {
   const profile = await prisma.profile.findUnique({
     where: { id: "singleton" },
@@ -29,6 +37,9 @@ export default async function Home() {
   const publications = await prisma.publication.findMany({
     where: { published: true },
     orderBy: [{ order: "asc" }, { year: "desc" }],
+  });
+  const educations: EducationEntry[] = await (prisma as any).education.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
   });
   const hkis = await prisma.intellectualProperty.findMany({
     orderBy: [{ order: "asc" }, { year: "desc" }],
@@ -97,12 +108,37 @@ export default async function Home() {
             ))}
           </div>
 
-          {/* Bio (truncated in sidebar) */}
-          {bio && (
+          {/* Educational background (truncated in sidebar) */}
+          {educations.length > 0 ? (
+            <div className="mt-5 flex w-full flex-col gap-2 text-left">
+              <span className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground tracking-wider">
+                <GraduationCap className="h-3.5 w-3.5 flex-shrink-0" />
+                Educational Background
+              </span>
+              {educations.map((education) => (
+                <div key={education.id} className="w-full border-b border-border/60 pb-3 last:border-b-0 last:pb-0">
+                  <p className="break-words text-sm font-semibold leading-snug text-muted-foreground">
+                    {education.degree}
+                  </p>
+                  <p className="mt-1 break-words text-xs leading-relaxed text-emerald-400">
+                    {education.institution}
+                  </p>
+                  <p className="mt-0.5 break-words text-xs leading-relaxed text-muted-foreground">
+                    {/* {education.major} */}
+                  </p>
+                  {education.location && (
+                    <p className="mt-0.5 break-words text-[11px] text-muted-foreground">
+                      {education.location}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : profile?.educationalBackground ? (
             <p className="mt-1 line-clamp-4 break-words text-left text-xs leading-relaxed text-muted-foreground">
-              {bio}
+              {profile.educationalBackground}
             </p>
-          )}
+          ) : null}
         </div>
 
         {/* Contact */}

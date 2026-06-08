@@ -9,6 +9,7 @@ export async function upsertProfile(formData: FormData) {
     name: (formData.get("name") as string) || "",
     title: (formData.get("title") as string) || "",
     bio: (formData.get("bio") as string) || "",
+    educationalBackground: (formData.get("educationalBackground") as string) || "",
     location: (formData.get("location") as string) || "",
     email: (formData.get("email") as string) || "",
     avatarUrl: (formData.get("avatarUrl") as string) || null,
@@ -25,6 +26,7 @@ export async function upsertProfile(formData: FormData) {
   });
 
   revalidatePath("/");
+  revalidatePath("/admin");
   revalidatePath("/admin/settings");
 }
 

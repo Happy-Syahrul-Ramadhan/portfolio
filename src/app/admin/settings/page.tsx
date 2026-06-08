@@ -11,7 +11,7 @@ export default async function SettingsPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight font-heading">Settings</h1>
         <p className="text-muted-foreground mt-2">
-          Update your public profile. Changes will reflect on the Home page.
+          Update your public profile, including educational background. Changes will reflect on the Home page.
         </p>
       </div>
 

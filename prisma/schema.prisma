@@ -51,6 +51,7 @@ model Profile {
   name      String  @default("")
   title     String  @default("")
   bio       String  @default("")
+  educationalBackground String  @default("") @map("educational_background")
   location  String  @default("")
   email     String  @default("")
   avatarUrl String? @map("avatar_url")
@@ -61,6 +62,18 @@ model Profile {
   cvUrl     String? @map("cv_url")
 
   @@map("profile")
+}
+
+model Education {
+  id         String   @id @default(uuid()) @db.Uuid
+  createdAt  DateTime @default(now()) @map("created_at")
+  degree     String
+  institution String
+  major      String
+  location   String?
+  order      Int      @default(0)
+
+  @@map("educations")
 }
 
 model WorkExperience {

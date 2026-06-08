@@ -7,6 +7,8 @@ import {
   ArrowRight,
   BookOpen,
   Shield,
+  User,
+  GraduationCap,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -17,6 +19,7 @@ export default async function AdminDashboard() {
   const certificateCount = await prisma.certificate.count();
   const publicationCount = await prisma.publication.count();
   const hkiCount = await prisma.intellectualProperty.count();
+  const educationCount = await prisma.education.count();
 
   return (
     <div className="flex flex-col gap-8">
@@ -30,6 +33,48 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Profile Card */}
+        <div className="rounded-xl border bg-card text-card-foreground shadow-sm flex flex-col">
+          <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+            <h3 className="tracking-tight text-sm font-medium">
+              Profile Settings
+            </h3>
+            <User className="h-4 w-4 text-muted-foreground" />
+          </div>
+          <div className="p-6 pt-0">
+            <div className="text-2xl font-bold">CRUD</div>
+            <p className="text-xs text-muted-foreground flex items-center mt-4">
+              <Link
+                href="/admin/settings"
+                className="text-primary hover:underline flex items-center gap-1"
+              >
+                Manage Profile <ArrowRight className="h-3 w-3" />
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        {/* Education Card */}
+        <div className="rounded-xl border bg-card text-card-foreground shadow-sm flex flex-col">
+          <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+            <h3 className="tracking-tight text-sm font-medium">
+              Education Entries
+            </h3>
+            <GraduationCap className="h-4 w-4 text-muted-foreground" />
+          </div>
+          <div className="p-6 pt-0">
+            <div className="text-2xl font-bold">{educationCount}</div>
+            <p className="text-xs text-muted-foreground flex items-center mt-4">
+              <Link
+                href="/admin/education"
+                className="text-primary hover:underline flex items-center gap-1"
+              >
+                Manage Education <ArrowRight className="h-3 w-3" />
+              </Link>
+            </p>
+          </div>
+        </div>
+
         {/* Project Card */}
         <div className="rounded-xl border bg-card text-card-foreground shadow-sm flex flex-col">
           <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
