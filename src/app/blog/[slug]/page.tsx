@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react"
 import BlogContent from "./BlogContent"
 import ShareButtons from "@/app/components/ShareButtons"
 
-const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://syahrul-seven.vercel.app"
+const siteUrl = "https://syahrul-seven.vercel.app"
 
 export const dynamic = "force-dynamic"
 
