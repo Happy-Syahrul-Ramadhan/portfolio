@@ -1,0 +1,24 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="72" y1="24" x2="1128" y2="606" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="0.5" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="196" y1="114" x2="1000" y2="516" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#22C55E" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="48" fill="url(#bg)"/>
+  <circle cx="980" cy="120" r="180" fill="#38BDF8" fill-opacity="0.16"/>
+  <circle cx="220" cy="540" r="210" fill="#22C55E" fill-opacity="0.12"/>
+  <path d="M180 136C180 123.297 190.297 113 203 113H997C1009.7 113 1020 123.297 1020 136V494C1020 506.703 1009.7 517 997 517H203C190.297 517 180 506.703 180 494V136Z" stroke="white" stroke-opacity="0.12" stroke-width="2"/>
+  <rect x="222" y="164" width="160" height="34" rx="17" fill="white" fill-opacity="0.12"/>
+  <text x="242" y="187" fill="white" fill-opacity="0.9" font-family="Arial, sans-serif" font-size="18" letter-spacing="2">BLOG PREVIEW</text>
+  <text x="220" y="322" fill="white" font-family="Arial, sans-serif" font-size="76" font-weight="800">Syahrul Blog</text>
+  <rect x="220" y="378" width="340" height="10" rx="5" fill="url(#accent)"/>
+  <rect x="660" y="164" width="280" height="280" rx="32" fill="white" fill-opacity="0.06"/>
+  <path d="M705 388L770 292L826 350L862 314L914 388H705Z" fill="url(#accent)" fill-opacity="0.95"/>
+  <circle cx="800" cy="255" r="34" fill="#F8FAFC" fill-opacity="0.92"/>
+</svg>

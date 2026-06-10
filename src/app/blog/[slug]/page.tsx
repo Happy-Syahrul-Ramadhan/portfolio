@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -9,17 +10,78 @@ const siteUrl = "https://syahrul-seven.vercel.app"
 
 export const dynamic = "force-dynamic"
 
+async function getBlogPost(slug: string) {
+  return prisma.blog.findFirst({
+    where: { slug, published: true },
+  })
+}
+
+function getAbsoluteImageUrl(imageUrl: string | null) {
+  if (!imageUrl) return undefined
+
+  try {
+    return new URL(imageUrl, siteUrl).toString()
+  } catch {
+    return undefined
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const blog = await getBlogPost(slug)
+
+  if (!blog) {
+    return {
+      title: "Blog Not Found",
+    }
+  }
+
+  const blogUrl = `${siteUrl}/blog/${blog.slug}`
+  const imageUrl = getAbsoluteImageUrl(blog.imageUrl)
+  const previewImageUrl = imageUrl ?? "/blog-preview-default.svg"
+
+  return {
+    title: blog.title,
+    description: blog.excerpt,
+    alternates: {
+      canonical: blogUrl,
+    },
+    openGraph: {
+      title: blog.title,
+      description: blog.excerpt,
+      url: blogUrl,
+      siteName: "Syahrul Ramadhan",
+      type: "article",
+      images: [
+        {
+          url: previewImageUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.excerpt,
+      images: [previewImageUrl],
+    },
+  }
+}
+
 export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  
-  // findFirst allows combining slug (unique) with published filter
-  const blog = await prisma.blog.findFirst({
-    where: { slug, published: true },
-  })
+
+  const blog = await getBlogPost(slug)
 
   if (!blog) {
     notFound()

@@ -10,8 +10,10 @@ import { TopLoader } from "./components/TopLoader";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const siteUrl = "https://syahrul-seven.vercel.app";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Happy Syahrul Ramadhan - Data Engineer",
   description: "portfolio website.",
 };
