@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Happy Syahrul Ramadhan - Data Engineer",
   description: "portfolio website.",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({

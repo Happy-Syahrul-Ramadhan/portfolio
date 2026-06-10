@@ -25,12 +25,12 @@ async function main() {
     },
   })
 
-  console.log("✅ Admin credentials updated successfully in the database!")
+  console.log("Admin credentials updated successfully in the database!")
 }
 
 main()
   .catch((e) => {
-    console.error("❌ Error:", e)
+    console.error("Error:", e)
     process.exit(1)
   })
   .finally(async () => {
