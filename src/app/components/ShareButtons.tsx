@@ -19,7 +19,7 @@ export default function ShareButtons({ title, url, hashtags }: ShareButtonsProps
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}${hashtags ? `&hashtags=${encodedHashtags}` : ""}`,
-    whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+    whatsapp: `https://wa.me/?text=${encodedUrl}`,
     instagram: `https://www.instagram.com/`, // Instagram doesn't support direct URL sharing
   }
 

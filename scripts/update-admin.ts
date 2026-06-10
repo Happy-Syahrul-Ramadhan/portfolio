@@ -4,28 +4,28 @@ import bcrypt from "bcryptjs"
 const prisma = new PrismaClient()
 
 async function main() {
-  const hashedPassword = await bcrypt.hash("syahrul123", 10)
+  const username = process.env.ADMIN_USERNAME
+  const password = process.env.ADMIN_PASSWORD
 
-  // Delete old admin if exists
-  await prisma.admin.deleteMany({
-    where: { username: "admin" }
-  })
+  if (!username || !password) {
+    throw new Error("ADMIN_USERNAME and ADMIN_PASSWORD must be set")
+  }
 
-  // Create or update admin with new credentials
+  const hashedPassword = await bcrypt.hash(password, 10)
+
+  // Create or update the admin record in the database
   await prisma.admin.upsert({
-    where: { username: "syahrul" },
+    where: { username },
     update: {
       password: hashedPassword,
     },
     create: {
-      username: "syahrul",
+      username,
       password: hashedPassword,
     },
   })
 
-  console.log("✅ Admin credentials updated successfully!")
-  console.log("Username: syahrul")
-  console.log("Password: syahrul123")
+  console.log("✅ Admin credentials updated successfully in the database!")
 }
 
 main()

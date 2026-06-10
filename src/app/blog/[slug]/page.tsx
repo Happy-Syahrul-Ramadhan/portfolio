@@ -5,6 +5,8 @@ import { ArrowLeft } from "lucide-react"
 import BlogContent from "./BlogContent"
 import ShareButtons from "@/app/components/ShareButtons"
 
+const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://syahrul-seven.vercel.app"
+
 export const dynamic = "force-dynamic"
 
 export default async function BlogPostPage({
@@ -52,7 +54,7 @@ export default async function BlogPostPage({
 
       <ShareButtons 
         title={blog.title} 
-        url={`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/blog/${blog.slug}`}
+        url={`${siteUrl}/blog/${blog.slug}`}
         hashtags={blog.hashtags || undefined}
       />
 

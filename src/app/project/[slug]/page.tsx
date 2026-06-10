@@ -5,6 +5,8 @@ import { ArrowLeft, ExternalLink } from "lucide-react"
 import ProjectContent from "./ProjectContent"
 import ShareButtons from "@/app/components/ShareButtons"
 
+const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://syahrul-seven.vercel.app"
+
 export const dynamic = "force-dynamic"
 
 export default async function ProjectDetailPage({
@@ -63,7 +65,7 @@ export default async function ProjectDetailPage({
 
       <ShareButtons 
         title={project.title} 
-        url={`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/project/${project.slug}`}
+        url={`${siteUrl}/project/${project.slug}`}
         hashtags={project.hashtags || undefined}
       />
 
