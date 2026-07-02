@@ -38,7 +38,7 @@ export default async function ProjectDetailPage({
       )}
 
       <header className="flex flex-col gap-3">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight font-heading leading-tight">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight font-heading leading-tight">
           {project.title}
         </h1>
         <time className="text-muted-foreground text-sm">
