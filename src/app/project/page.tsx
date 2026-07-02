@@ -26,38 +26,43 @@ export default async function ProjectPage() {
           <p className="text-muted-foreground">No projects have been published yet.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-4">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
-            <Link key={project.id} href={`/project/${project.slug}`}
-              className="flex flex-col group rounded-2xl border bg-card text-card-foreground overflow-hidden hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 relative">
-              <div className="relative">
+            <Link
+              key={project.id}
+              href={`/project/${project.slug}`}
+              className="group flex flex-col gap-4 rounded-xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
+            >
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted">
                 {project.imageUrl ? (
-                  <div className="w-full aspect-video overflow-hidden">
-                    <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
+                  <img
+                    src={project.imageUrl}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 ) : (
-                  <div className="w-full aspect-video bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl scale-150"></div>
-                    <span className="text-5xl text-primary/40 font-heading font-bold relative z-10">{project.title.charAt(0)}</span>
-                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 relative overflow-hidden">
+                    <div className="absolute inset-0 scale-150 rounded-full bg-primary/5 blur-3xl" />
+                    <span className="relative z-10 text-5xl font-bold font-heading text-primary/40">{project.title.charAt(0)}</span>
+                    <div className="absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary/20 bg-background/80 backdrop-blur-sm">
                       <Layers className="h-6 w-6 text-primary/60" />
                     </div>
                   </div>
                 )}
                 {project.link && (
-                  <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 shadow-lg z-10">
+                  <div className="absolute top-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-background/90 shadow-lg backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:scale-110 group-hover:opacity-100 z-10">
                     <ExternalLink className="h-4 w-4 text-primary" />
                   </div>
                 )}
               </div>
-              <div className="p-6 flex flex-col gap-3">
-                <h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">{project.description}</p>
+
+              <div className="flex flex-col gap-3">
+                <h3 className="text-lg font-semibold leading-tight transition-colors group-hover:text-primary">{project.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3">{project.description}</p>
                 {project.link && (
-                  <div className="inline-flex items-center gap-1.5 text-sm font-medium text-primary/80 hover:text-primary transition-colors mt-2">
+                  <div className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-primary/80 transition-colors hover:text-primary">
                     View Live Project
-                    <ExternalLink className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </div>
                 )}
               </div>
