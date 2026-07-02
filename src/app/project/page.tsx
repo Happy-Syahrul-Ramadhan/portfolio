@@ -26,7 +26,7 @@ export default async function ProjectPage() {
           <p className="text-muted-foreground">No projects have been published yet.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-4">
           {projects.map((project) => (
             <Link key={project.id} href={`/project/${project.slug}`}
               className="flex flex-col group rounded-2xl border bg-card text-card-foreground overflow-hidden hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 relative">

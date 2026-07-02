@@ -50,7 +50,7 @@ export default function CertificatesList({ certificates }: { certificates: Certi
             <p className="text-muted-foreground">No certificates available yet.</p>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {certificates.map((cert) => (
               <article
                 key={cert.id}
