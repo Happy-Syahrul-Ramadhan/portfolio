@@ -15,8 +15,14 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
   const projectCount = await prisma.project.count();
+  const pinnedProjectCount = await prisma.project.count({
+    where: { pinOrder: { not: null } },
+  });
   const blogCount = await prisma.blog.count();
   const certificateCount = await prisma.certificate.count();
+  const pinnedCertificateCount = await prisma.certificate.count({
+    where: { pinOrder: { not: null } },
+  });
   const publicationCount = await prisma.publication.count();
   const hkiCount = await prisma.intellectualProperty.count();
   const educationCount = await prisma.education.count();
@@ -85,6 +91,9 @@ export default async function AdminDashboard() {
           </div>
           <div className="p-6 pt-0">
             <div className="text-2xl font-bold">{projectCount}</div>
+            <p className="text-xs text-muted-foreground mt-2">
+              {pinnedProjectCount} pinned for the public page
+            </p>
             <p className="text-xs text-muted-foreground flex items-center mt-4">
               <Link
                 href="/admin/projects"
@@ -125,6 +134,9 @@ export default async function AdminDashboard() {
           </div>
           <div className="p-6 pt-0">
             <div className="text-2xl font-bold">{certificateCount}</div>
+            <p className="text-xs text-muted-foreground mt-2">
+              {pinnedCertificateCount} pinned for the public page
+            </p>
             <p className="text-xs text-muted-foreground flex items-center mt-4">
               <Link
                 href="/admin/certificates"

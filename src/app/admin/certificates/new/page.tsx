@@ -136,6 +136,23 @@ export default function NewCertificatePage() {
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-2">
+            <label htmlFor="pinOrder" className="text-sm font-medium">
+              Pin Order
+            </label>
+            <input
+              type="number"
+              id="pinOrder"
+              name="pinOrder"
+              min={1}
+              className="rounded-lg border bg-background px-3 py-2 text-sm"
+              placeholder="Kosongkan jika tidak ingin dipin"
+            />
+            <p className="text-xs text-muted-foreground">
+              Isi angka untuk menampilkan certificate di urutan pin teratas.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-2">
             <label htmlFor="order" className="text-sm font-medium">
               Display Order
             </label>

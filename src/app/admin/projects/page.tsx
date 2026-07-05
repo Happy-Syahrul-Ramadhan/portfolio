@@ -1,13 +1,13 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
-import { Plus, Pencil } from "lucide-react"
+import { Plus, Pencil, Pin } from "lucide-react"
 import ProjectActions from "./ProjectActions"
 
 export const dynamic = "force-dynamic"
 
 export default async function ManageProjects() {
   const projects = await prisma.project.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ pinOrder: "asc" }, { createdAt: "desc" }],
   })
 
   return (
@@ -42,6 +42,12 @@ export default async function ManageProjects() {
                       <span className={project.published ? "status-badge-success" : "px-2 py-0.5 text-xs font-medium rounded-full bg-muted text-muted-foreground"}>
                         {project.published ? "Published" : "Draft"}
                       </span>
+                      {project.pinOrder !== null && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                          <Pin className="h-3 w-3" />
+                          Pin #{project.pinOrder}
+                        </span>
+                      )}
                     </div>
                     <p className="text-sm text-muted-foreground line-clamp-2 sm:line-clamp-1">{project.description}</p>
                   </div>
@@ -51,6 +57,7 @@ export default async function ManageProjects() {
                     projectId={project.id}
                     projectTitle={project.title}
                     isPublished={project.published}
+                    isPinned={project.pinOrder !== null}
                   />
                   <Link href={`/admin/projects/${project.id}/edit`}
                     className="inline-flex items-center justify-center rounded-md text-sm transition-colors hover:bg-accent h-9 w-9 text-muted-foreground hover:text-foreground">

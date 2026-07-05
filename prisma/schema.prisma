@@ -19,6 +19,7 @@ model Project {
   published   Boolean  @default(false)
   slug        String   @unique @default("")
   hashtags    String?
+  pinOrder    Int?     @map("pin_order")
 
   @@map("projects")
 }
@@ -102,6 +103,7 @@ model Certificate {
   credentialUrl String?   @map("credential_url")
   published     Boolean   @default(false)
   order         Int       @default(0)
+  pinOrder      Int?      @map("pin_order")
   credentialId  String?   @map("credential_id")
   skills        String?
 

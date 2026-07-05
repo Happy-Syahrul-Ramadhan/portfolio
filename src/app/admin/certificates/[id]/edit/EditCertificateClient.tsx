@@ -18,6 +18,7 @@ type Certificate = {
   skills: string | null
   published: boolean
   order: number
+  pinOrder: number | null
 }
 
 export default function EditCertificateClient({ certificate }: { certificate: Certificate }) {
@@ -160,6 +161,24 @@ export default function EditCertificateClient({ certificate }: { certificate: Ce
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="pinOrder" className="text-sm font-medium">
+              Pin Order
+            </label>
+            <input
+              type="number"
+              id="pinOrder"
+              name="pinOrder"
+              min={1}
+              defaultValue={certificate.pinOrder ?? ""}
+              className="rounded-lg border bg-background px-3 py-2 text-sm"
+              placeholder="Kosongkan jika tidak ingin dipin"
+            />
+            <p className="text-xs text-muted-foreground">
+              Kosong berarti tidak dipin. Angka lebih kecil akan muncul lebih dulu.
+            </p>
+          </div>
+
           <div className="flex flex-col gap-2">
             <label htmlFor="order" className="text-sm font-medium">
               Display Order

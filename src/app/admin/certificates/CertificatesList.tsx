@@ -2,8 +2,8 @@
 
 import { useTransition } from "react"
 import Link from "next/link"
-import { Plus, Eye, EyeOff, Pencil, Trash2 } from "lucide-react"
-import { toggleCertificatePublish, deleteCertificate } from "@/app/actions/certificate"
+import { Plus, Eye, EyeOff, Pencil, Pin, PinOff, Trash2 } from "lucide-react"
+import { toggleCertificatePublish, deleteCertificate, toggleCertificatePin } from "@/app/actions/certificate"
 import { useToast } from "@/app/components/ToastProvider"
 
 type Certificate = {
@@ -13,6 +13,7 @@ type Certificate = {
   imageUrl: string
   issuer: string | null
   published: boolean
+  pinOrder: number | null
 }
 
 export default function CertificatesList({ certificates }: { certificates: Certificate[] }) {
@@ -27,7 +28,7 @@ export default function CertificatesList({ certificates }: { certificates: Certi
           isPublished ? `"${title}" unpublished` : `"${title}" published`,
           "success"
         )
-      } catch (error) {
+      } catch {
         showToast("Failed to update certificate", "error")
       }
     })
@@ -40,8 +41,22 @@ export default function CertificatesList({ certificates }: { certificates: Certi
       try {
         await deleteCertificate(id)
         showToast(`"${title}" deleted`, "success")
-      } catch (error) {
+      } catch {
         showToast("Failed to delete certificate", "error")
+      }
+    })
+  }
+
+  const handleTogglePin = (id: string, title: string, isPinned: boolean) => {
+    startTransition(async () => {
+      try {
+        await toggleCertificatePin(id, isPinned)
+        showToast(
+          isPinned ? `"${title}" unpinned` : `"${title}" pinned`,
+          "success"
+        )
+      } catch {
+        showToast("Failed to update certificate pin", "error")
       }
     })
   }
@@ -83,9 +98,32 @@ export default function CertificatesList({ certificates }: { certificates: Certi
                 Issued by: {cert.issuer}
               </p>
             )}
+            {cert.pinOrder !== null && (
+              <p className="mt-1 inline-flex w-fit items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                <Pin className="h-3 w-3" />
+                Pin #{cert.pinOrder}
+              </p>
+            )}
           </div>
 
           <div className="admin-list-actions gap-2">
+            <button
+              onClick={() => handleTogglePin(cert.id, cert.title, cert.pinOrder !== null)}
+              disabled={isPending}
+              className={`rounded-lg p-2 text-sm transition-colors disabled:opacity-50 ${
+                cert.pinOrder !== null
+                  ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+              title={cert.pinOrder !== null ? "Unpin" : "Pin"}
+            >
+              {cert.pinOrder !== null ? (
+                <PinOff className="h-4 w-4" />
+              ) : (
+                <Pin className="h-4 w-4" />
+              )}
+            </button>
+
             <button
               onClick={() => handleTogglePublish(cert.id, cert.title, cert.published)}
               disabled={isPending}

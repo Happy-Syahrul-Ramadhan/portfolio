@@ -20,12 +20,12 @@ interface Project {
   content: string | null
   published: boolean
   hashtags: string | null
+  pinOrder: number | null
 }
 
 export default function EditProjectClient({ project }: { project: Project }) {
   const [content, setContent] = useState(project.content || "")
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState("")
   const { showToast } = useToast()
   const router = useRouter()
 
@@ -40,7 +40,7 @@ export default function EditProjectClient({ project }: { project: Project }) {
         await updateProject(project.id, formData)
         showToast("Project updated successfully!", "success")
         setTimeout(() => router.push("/admin/projects"), 1000)
-      } catch (err) {
+      } catch {
         showToast("Failed to update project", "error")
       }
     })
@@ -94,9 +94,22 @@ export default function EditProjectClient({ project }: { project: Project }) {
         </div>
 
         <div className="space-y-2">
+          <label className="text-sm font-medium" htmlFor="pinOrder">Pin Order (Optional)</label>
+          <input
+            id="pinOrder"
+            name="pinOrder"
+            type="number"
+            min={1}
+            defaultValue={project.pinOrder ?? ""}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            placeholder="Kosongkan jika tidak ingin dipin"
+          />
+          <p className="text-xs text-muted-foreground">Kosong berarti tidak dipin. Angka lebih kecil akan tampil lebih dulu di halaman publik.</p>
+        </div>
+
+        <div className="space-y-2">
           <label className="text-sm font-medium">Details / Content (Optional)</label>
           <TiptapEditor value={content} onChange={setContent} />
-          {error && <p className="text-xs text-red-500">{error}</p>}
         </div>
 
         <div className="flex items-center gap-2">

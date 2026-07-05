@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 
 export default async function AdminCertificatesPage() {
   const certificates = await prisma.certificate.findMany({
-    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+    orderBy: [{ pinOrder: "asc" }, { order: "asc" }, { createdAt: "desc" }],
   })
 
   return (

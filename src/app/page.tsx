@@ -46,7 +46,7 @@ export default async function Home() {
   });
   const projects = await prisma.project.findMany({
     where: { published: true },
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ pinOrder: "asc" }, { createdAt: "desc" }],
     take: 6,
   });
   const blogs = await prisma.blog.findMany({

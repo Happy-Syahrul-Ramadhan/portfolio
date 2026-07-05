@@ -13,7 +13,6 @@ const TiptapEditor = dynamic(() => import("@/app/components/TiptapEditor"), { ss
 export default function CreateProjectClient() {
   const [content, setContent] = useState("")
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState("")
   const { showToast } = useToast()
   const router = useRouter()
 
@@ -28,7 +27,7 @@ export default function CreateProjectClient() {
         await createProject(formData)
         showToast("Project created successfully!", "success")
         setTimeout(() => router.push("/admin/projects"), 1000)
-      } catch (err) {
+      } catch {
         showToast("Failed to create project", "error")
       }
     })
@@ -84,9 +83,21 @@ export default function CreateProjectClient() {
         </div>
 
         <div className="space-y-2">
+          <label className="text-sm font-medium" htmlFor="pinOrder">Pin Order (Optional)</label>
+          <input
+            id="pinOrder"
+            name="pinOrder"
+            type="number"
+            min={1}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            placeholder="Kosongkan jika tidak ingin dipin"
+          />
+          <p className="text-xs text-muted-foreground">Isi angka untuk menaruh project di urutan pin. Angka lebih kecil tampil lebih dulu.</p>
+        </div>
+
+        <div className="space-y-2">
           <label className="text-sm font-medium">Details / Content (Optional)</label>
           <TiptapEditor value={content} onChange={setContent} />
-          {error && <p className="text-xs text-red-500">{error}</p>}
         </div>
 
         <div className="flex items-center gap-2">
